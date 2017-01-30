@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6C064EE81E1742B700658318 /* NoKeepButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C064EE71E1742B700658318 /* NoKeepButton.swift */; };
+		6C19C4121E3EC4BB000FE66C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6C19C4111E3EC4BB000FE66C /* GoogleService-Info.plist */; };
 		6C1DAFF81D8EBB9F00044A41 /* MainMenuTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1DAFF71D8EBB9F00044A41 /* MainMenuTabBarController.swift */; };
 		6C1DAFFA1D8FB7C800044A41 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1DAFF91D8FB7C800044A41 /* Color.swift */; };
 		6C1DB0081D8FC1F300044A41 /* BaseNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1DB0071D8FC1F300044A41 /* BaseNavigationViewController.swift */; };
@@ -36,7 +37,6 @@
 		6CA95B331D6749EC00983152 /* EventSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA95B321D6749EC00983152 /* EventSummary.swift */; };
 		6CC5C15D1D90B57D00683EBB /* AppIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CC5C15C1D90B57D00683EBB /* AppIcon.xcassets */; };
 		6CC5C15F1D90BB9B00683EBB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CC5C15E1D90BB9B00683EBB /* Images.xcassets */; };
-		6CCD65AC1E2509000017826B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6CCD65AB1E2509000017826B /* GoogleService-Info.plist */; };
 		6CD322C71D7EAB1B004B0851 /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD322C61D7EAB1B004B0851 /* Define.swift */; };
 		6CD322C91D7EAFCF004B0851 /* CheckListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD322C81D7EAFCF004B0851 /* CheckListTableViewCell.swift */; };
 		6CD322CD1D83F056004B0851 /* UserRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD322CC1D83F056004B0851 /* UserRegister.swift */; };
@@ -48,6 +48,7 @@
 
 /* Begin PBXFileReference section */
 		6C064EE71E1742B700658318 /* NoKeepButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoKeepButton.swift; sourceTree = "<group>"; };
+		6C19C4111E3EC4BB000FE66C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6C1DAFF71D8EBB9F00044A41 /* MainMenuTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuTabBarController.swift; sourceTree = "<group>"; };
 		6C1DAFF91D8FB7C800044A41 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		6C1DB0071D8FC1F300044A41 /* BaseNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationViewController.swift; sourceTree = "<group>"; };
@@ -79,7 +80,6 @@
 		6CA95B321D6749EC00983152 /* EventSummary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventSummary.swift; sourceTree = "<group>"; };
 		6CC5C15C1D90B57D00683EBB /* AppIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcon.xcassets; sourceTree = "<group>"; };
 		6CC5C15E1D90BB9B00683EBB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		6CCD65AB1E2509000017826B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6CCD65AD1E250A230017826B /* Eventory.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Eventory.entitlements; sourceTree = "<group>"; };
 		6CD322C61D7EAB1B004B0851 /* Define.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		6CD322C81D7EAFCF004B0851 /* CheckListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckListTableViewCell.swift; sourceTree = "<group>"; };
@@ -140,7 +140,6 @@
 				5885F7F918D04889CA56885E /* Frameworks */,
 				4CE8649E3AD8F1B8B7264449 /* Pods */,
 				6CA95B0A1D6729BF00983152 /* Products */,
-				6CCD65AB1E2509000017826B /* GoogleService-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -155,6 +154,7 @@
 		6CA95B0B1D6729BF00983152 /* Eventory */ = {
 			isa = PBXGroup;
 			children = (
+				6C19C4111E3EC4BB000FE66C /* GoogleService-Info.plist */,
 				6CA95B271D672DA000983152 /* Codes */,
 				6CA95B251D672CEF00983152 /* Etc */,
 				6CA95B281D672DBC00983152 /* Resources */,
@@ -329,7 +329,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6CA95B2B1D672FDA00983152 /* EventInfoTableViewCell.xib in Resources */,
-				6CCD65AC1E2509000017826B /* GoogleService-Info.plist in Resources */,
+				6C19C4121E3EC4BB000FE66C /* GoogleService-Info.plist in Resources */,
 				6CA95B171D6729BF00983152 /* LaunchScreen.storyboard in Resources */,
 				6CC5C15D1D90B57D00683EBB /* AppIcon.xcassets in Resources */,
 				6CA95B121D6729BF00983152 /* Main.storyboard in Resources */,
