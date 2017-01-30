@@ -1,0 +1,16 @@
+# ios
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcworkspace/contents.xcworkspacedata
+Pods/
+*.playground
+UserInterfaceState.xcuserstate
+build/
+DerivedData/
+GoogleService-Info.plist
+
+# Etc
+.DS_Store
+.idea/
+eventory.iml
+dbconfig.yml
