@@ -18,6 +18,7 @@ let SettingTableViewCellIdentifier: String   = "SettingTableViewCell"
 let RegisterPlaceViewControllerIdentifier: String   = "RegisterPlaceViewController"
 let RegisterGenreViewControllerIdentifier: String   = "RegisterGenreViewController"
 let SettingViewControllerIdentifier: String         = "SettingViewController"
+let EventPageWebViewControllerIdentifier: String    = "EventPageWebViewController"
 
 // Alert
 let NetworkErrorTitle: String   = "サーバー接続に失敗しました"

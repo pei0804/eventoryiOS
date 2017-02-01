@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import SwiftTask
+import SVProgressHUD
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+
+        SVProgressHUD.setBackgroundColor(UIColor.whiteColor())
+        SVProgressHUD.setBackgroundLayerColor(UIColor.whiteColor())
         
         // TODO: パス確認用（削除必須）
 //        print(NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true))

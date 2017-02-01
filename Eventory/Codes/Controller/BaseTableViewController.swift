@@ -12,7 +12,7 @@ import SafariServices
 import SVProgressHUD
 import SwiftTask
 
-class BaseTableViewController: UITableViewController, SFSafariViewControllerDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+class BaseTableViewController: UITableViewController, SFSafariViewControllerDelegate, UIWebViewDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
 
     @IBOutlet weak var scrollView: UIScrollView?
     
@@ -42,8 +42,8 @@ class BaseTableViewController: UITableViewController, SFSafariViewControllerDele
         self.edgesForExtendedLayout = UIRectEdge.None
 
         self.tableView.tableFooterView = UIView()
-        self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
-        self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(20, 0, 0, 0);
+        self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0)
+        self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(20, 0, 0, 0)
 
         self.tableView.registerNib(UINib(nibName: EventInfoTableViewCellIdentifier, bundle: nil), forCellReuseIdentifier: EventInfoTableViewCellIdentifier)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.becomeActive(_:)), name: UIApplicationDidBecomeActiveNotification, object: nil)
@@ -172,9 +172,17 @@ class BaseTableViewController: UITableViewController, SFSafariViewControllerDele
             self.presentViewController(alert, animated: true, completion: nil)
             return
         }
-        let brow = SFSafariViewController(URL: NSURL(string: url)!, entersReaderIfAvailable: false)
-        brow.delegate = self
-        presentViewController(brow, animated: true, completion: nil)
+        if #available(iOS 9.0, *) {
+            let brow = SFSafariViewController(URL: NSURL(string: url)!, entersReaderIfAvailable: false)
+            brow.delegate = self
+            presentViewController(brow, animated: true, completion: nil)
+        } else {
+            let vc = UIStoryboard(name:"Main", bundle: nil).instantiateViewControllerWithIdentifier(EventPageWebViewControllerIdentifier) as! EventPageWebViewController
+            vc.targetURL = url
+            vc.navigationTitle = eventSummaries[indexPath.row].title
+            presentViewController(vc, animated: true, completion: nil)
+            // Fallback on earlier versions
+        }
     }
 
     // MARK: - DZNEmptyDataSetSource
