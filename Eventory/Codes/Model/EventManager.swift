@@ -126,7 +126,7 @@ class EventManager {
             self.fetchNewEvent()
         } else {
             self.realm.beginWrite()
-            let oldLocations = self.realm.objects(Event).filter(NSPredicate(format:"startAt < %@", NSDate().dateByAddingTimeInterval(-86400)))
+            let oldLocations = self.realm.objects(Event).filter(NSPredicate(format:"startAt < %@", NSDate().dateByAddingTimeInterval(0)))
             EventManager.sharedInstance.fetchNewEvent()
             self.realm.delete(oldLocations)
             do {
