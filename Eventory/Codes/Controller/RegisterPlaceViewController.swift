@@ -80,7 +80,7 @@ class RegisterPlaceViewController: UIViewController {
             self.navigationController?.popToRootViewControllerAnimated(true)
         } else {
             dispatch_async(dispatch_get_main_queue()) {
-                SVProgressHUD.showWithStatus(ServerConnectionMessage)
+                SVProgressHUD.showWithStatus("サービス利用準備中\n初回通信は時間がかかります。")
                 let task = [EventManager.sharedInstance.fetchNewEvent()]
                 Task.all(task).success { _ in
                     SVProgressHUD.dismiss()
