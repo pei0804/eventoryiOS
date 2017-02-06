@@ -12,7 +12,7 @@ import SafariServices
 import SVProgressHUD
 import SwiftTask
 
-class BaseTableViewController: UITableViewController, SFSafariViewControllerDelegate, UIWebViewDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+class BaseTableViewController: UITableViewController {
 
     @IBOutlet weak var scrollView: UIScrollView?
     
@@ -123,8 +123,10 @@ class BaseTableViewController: UITableViewController, SFSafariViewControllerDele
             return eventSummaries
         }
     }
+}
 
-    // MARK: - UITableViewDataSource
+// MARK: - UITableViewDataSource
+extension BaseTableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -150,10 +152,12 @@ class BaseTableViewController: UITableViewController, SFSafariViewControllerDele
         }
         return UITableViewCell()
     }
+}
 
 
-    // MARK: - UITableViewDelegate
-    
+// MARK: - UITableViewDelegate
+extension BaseTableViewController: SFSafariViewControllerDelegate, UIWebViewDelegate {
+
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath:NSIndexPath) {
 
         guard let eventSummaries = self.eventSummaries else {
@@ -179,8 +183,10 @@ class BaseTableViewController: UITableViewController, SFSafariViewControllerDele
             // Fallback on earlier versions
         }
     }
+}
 
-    // MARK: - DZNEmptyDataSetSource
+// MARK: - DZNEmptyDataSetDelegate
+extension BaseTableViewController: DZNEmptyDataSetDelegate {
 
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
         let text = "条件に合致する情報がありません"
@@ -191,8 +197,10 @@ class BaseTableViewController: UITableViewController, SFSafariViewControllerDele
 
         return NSAttributedString(string: text, attributes: attribs)
     }
+}
 
-    // MARK: - DZNEmptyDataSetDelegate
+// MARK: - DZNEmptyDataSetSource
+extension BaseTableViewController: DZNEmptyDataSetSource {
 
     func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
         return true
