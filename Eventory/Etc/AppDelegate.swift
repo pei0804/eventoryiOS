@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // TODO: パス確認用（削除必須）
 //        print(NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true))
         PushNotificationManager.sharedInstance.registerRemote()
+        UIApplication.sharedApplication().applicationIconBadgeNumber = -1
         
         // TODO ここらへんどうにかしたい
         if !UserRegister.sharedInstance.getSettingStatus() {
@@ -48,7 +49,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        
+    }
+
+    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+
     }
 
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
@@ -58,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         for i in 0..<deviceToken.length {
             tokenString += String(format: "%02.2hhx", arguments: [tokenChars[i]])
         }
-        
+
         FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.Unknown)
     }
     
@@ -86,8 +90,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+
+        dispatch_async(dispatch_get_main_queue()) {
+            let task = [EventManager.sharedInstance.fetchNewEvent()]
+            Task.all(task).success { _ in
+                if EventManager.sharedInstance.getSelectNewEventAll().count > 0 {
+                    UIApplication.sharedApplication().applicationIconBadgeNumber = 1
+                }
+                completionHandler(.NewData)
+                }.failure { _ in
+                    completionHandler(.Failed)
+            }
+        }
     }
-    
-    
 }
 
