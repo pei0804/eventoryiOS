@@ -20,7 +20,20 @@ class KeepEventViewController: BaseTableViewController {
         super.viewDidLoad()
     }
 
+    override func viewWillAppear(animated: Bool) {
+        SVProgressHUD.showWithStatus(ServerConnectionMessage)
+        self.handleRefresh()
+        self.refresh() {
+            SVProgressHUD.dismiss()
+        }
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+
+    override func refresh(completed: (() -> Void)? = nil) {
+        self.eventSummaries = EventManager.sharedInstance.getKeepEventAll()
+        completed?()
     }
 }

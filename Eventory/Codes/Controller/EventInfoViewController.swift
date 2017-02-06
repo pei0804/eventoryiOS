@@ -24,4 +24,11 @@ class EventInfoViewController: BaseTableViewController {
         super.didReceiveMemoryWarning()
     }
 
+    override func becomeActive(notification: NSNotification) {
+        SVProgressHUD.showWithStatus(ServerConnectionMessage)
+        self.refresh() {
+            SVProgressHUD.dismiss()
+        }
+    }
+
 }

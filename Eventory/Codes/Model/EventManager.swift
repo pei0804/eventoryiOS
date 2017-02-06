@@ -279,7 +279,7 @@ class EventManager {
                 "status": false
             ],
             [
-                "name": "JQuery",
+                "name": "jQuery",
                 "status": false
             ]
         ]

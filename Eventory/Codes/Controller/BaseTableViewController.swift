@@ -81,14 +81,9 @@ class BaseTableViewController: UITableViewController, SFSafariViewControllerDele
     }
 
     func becomeActive(notification: NSNotification) {
-        SVProgressHUD.showWithStatus(ServerConnectionMessage)
-        self.refresh() {
-            SVProgressHUD.dismiss()
-        }
     }
 
     @IBAction func pullRefresh(refreshControl: UIRefreshControl) {
-
         SVProgressHUD.showWithStatus(ServerConnectionMessage)
         self.handleRefresh()
         self.refresh() {
