@@ -27,6 +27,7 @@ class PushNotificationManager {
         let application = UIApplication.sharedApplication()
         let notificationSettings = UIUserNotificationSettings(
             forTypes: [.Badge, .Sound, .Alert], categories: nil)
+        application.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
         application.registerUserNotificationSettings(notificationSettings)
         application.registerForRemoteNotifications()
         FIRApp.configure()
