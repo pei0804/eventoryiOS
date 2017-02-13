@@ -167,6 +167,7 @@ class EventManager {
     
     func fetchNewEvent() -> Task<Float, String, NSError?> {
         var updatedAt = UserRegister.sharedInstance.getUserEventInfoUpdateTime()
+        let places = UserRegister.sharedInstance.getUserSettingPlaces()
         let result = self.realm.objects(Event)
 
         // 初回ダウンロードは更新時間は関係なしに取ってくるが、
@@ -179,9 +180,7 @@ class EventManager {
         let API = APISetting.scheme + APISetting.host
 
         return Task<Float, String, NSError?> { progress, fulfill, reject, configure in
-            Alamofire.request(.GET, "\(API)/api/smt/events", parameters: ["updated_at": updatedAt]).responseJSON { response in
-                //            Alamofire.request(.GET, "http://ganbaruman.xyz:8080/api/smt/events").responseJSON { response in
-
+            Alamofire.request(.GET, "\(API)/api/smt/events", parameters: ["updated_at": updatedAt, "places": places]).responseJSON { response in
                 if let statusCode = response.response?.statusCode {
                     if statusCode == 304 {
                         fulfill("SUCCESS")
