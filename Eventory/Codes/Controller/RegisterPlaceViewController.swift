@@ -25,11 +25,11 @@ class RegisterPlaceViewController: UIViewController {
     var rightBarButton: UIBarButtonItem = UIBarButtonItem()
     var settingStatus: Bool = false
     
-    @IBOutlet weak var searchBar: BaseSearchBar!
+//    @IBOutlet weak var searchBar: BaseSearchBar!
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.searchBar.delegate = self
+//        self.searchBar.delegate = self
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
@@ -44,7 +44,7 @@ class RegisterPlaceViewController: UIViewController {
             self.places = UserRegister.sharedInstance.getSettingPlaces()
             self.checkCount = UserRegister.sharedInstance.getUserSettingPlaces().count
         } else {
-            self.leftBarButton = UIBarButtonItem(title: "戻る", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(self.goBack(_:)))
+//            self.leftBarButton = UIBarButtonItem(title: "戻る", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(self.goBack(_:)))
             self.rightBarButton = UIBarButtonItem(title: "次へ", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(self.pushSubmitBtn(_:)))
             self.places = EventManager.sharedInstance.placesInitializer()
         }
@@ -144,31 +144,31 @@ extension RegisterPlaceViewController: UITableViewDelegate {
     }
 
 
-    func tableView(tableView: UITableView,canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-
-    func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
-        return "削除"
-    }
+//    func tableView(tableView: UITableView,canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+//        return true
+//    }
+//
+//    func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
+//        return "削除"
+//    }
 }
 
 
 // MARK: - UISearchBarDelegate
 
-extension RegisterPlaceViewController: UISearchBarDelegate {
-    
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        let text = self.searchBar.text ?? ""
-        if !text.isEmpty {
-            UserRegister.sharedInstance.insertNewSetting(&self.places, newSetting: text)
-            self.searchBar.text = ""
-            self.searchBar.resignFirstResponder()
-        }
-    }
-    
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        self.searchBar.text = ""
-        self.searchBar.resignFirstResponder()
-    }
-}
+//extension RegisterPlaceViewController: UISearchBarDelegate {
+//    
+//    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+//        let text = self.searchBar.text ?? ""
+//        if !text.isEmpty {
+//            UserRegister.sharedInstance.insertNewSetting(&self.places, newSetting: text)
+//            self.searchBar.text = ""
+//            self.searchBar.resignFirstResponder()
+//        }
+//    }
+//    
+//    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+//        self.searchBar.text = ""
+//        self.searchBar.resignFirstResponder()
+//    }
+//}

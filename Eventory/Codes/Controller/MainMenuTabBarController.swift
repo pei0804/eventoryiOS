@@ -13,18 +13,18 @@ class MainMenuTabBarController: UITabBarController {
     var newEvent: Int = 0 {
         didSet {
             if newEvent > 0 {
-                self.tabBar.items![2].badgeValue = "New"
+                self.tabBar.items![0].badgeValue = "New"
             } else {
-                self.tabBar.items![2].badgeValue = nil
+                self.tabBar.items![0].badgeValue = nil
             }
         }
     }
     
-    let tabBarImages: [String] = ["search", "noKeep", "new", "keep", "setting"]
+    let tabBarImages: [String] = ["new", "setting", "keep", "noKeep"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.selectedIndex = 2
+        self.selectedIndex = 0
         self.tabBar.tintColor = Colors.main
         self.tabBar.backgroundColor = UIColor.whiteColor()
         self.updateBadge(EventManager.sharedInstance.getSelectNewEventAll().count)

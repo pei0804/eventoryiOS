@@ -63,6 +63,36 @@ class UserRegister {
         }
         return userSettingPlaces
     }
+
+    // 開催地を自由に設定出来ないように変更したので、その対応
+    func migrationSettingPlaces() {
+
+        var newUserSettingPlaces: [String] = []
+        let userSettingPlaces = self.getUserSettingPlaces()
+        var initSettingPlaces = EventManager.sharedInstance.placesInitializer()
+
+        for i in initSettingPlaces.indices {
+
+            if let name = initSettingPlaces[i]["name"] as! String? {
+                if userSettingPlaces.indexOf(name) != nil {
+                    newUserSettingPlaces.append(String(name))
+                    initSettingPlaces[i]["status"] = true
+                }
+            }
+        }
+        let setting :String = SettingClass.Place.getSettingKey()
+        let userSetting :String = SettingClass.Place.getUserSettingKey()
+
+        // 設定の一覧
+        NSUserDefaults.standardUserDefaults().setObject(initSettingPlaces, forKey: setting);
+        NSUserDefaults.standardUserDefaults().synchronize();
+
+        // 実際に検索に使うワード
+        NSUserDefaults.standardUserDefaults().setObject(newUserSettingPlaces, forKey: userSetting);
+        NSUserDefaults.standardUserDefaults().synchronize();
+
+        return
+    }
     
     func getSettingPlaces() -> [Dictionary<String, AnyObject>] {
         return self.ud.objectForKey(SettingClass.Place.getSettingKey()) as! [Dictionary<String, AnyObject>]
@@ -81,8 +111,7 @@ class UserRegister {
                 userRegisterSetting.append(String(name))
             }
         }
-        print(userRegisterSetting.count)
-        
+
         var setting: String = ""
         var userSetting: String = ""
         

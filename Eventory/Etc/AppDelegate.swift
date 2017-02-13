@@ -34,6 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.makeKeyAndVisible()
         } else {
             EventManager.sharedInstance.eventInitializer()
+            UserRegister.sharedInstance.migrationSettingPlaces()
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let initialViewController = storyboard.instantiateViewControllerWithIdentifier("MainMenu")
             self.window?.rootViewController = initialViewController

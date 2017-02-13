@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--開催地-->
+        <!--希望開催地-->
         <scene sceneID="mQ0-wn-dpO">
             <objects>
                 <viewController storyboardIdentifier="RegisterPlaceViewController" id="cR8-IW-SBr" customClass="RegisterPlaceViewController" customModule="Eventory" customModuleProvider="target" sceneMemberID="viewController">
@@ -21,77 +21,26 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" placeholder="開催地追加" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VLz-3v-DwS" customClass="BaseSearchBar" customModule="Eventory" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="8s5-Nd-UgH"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="320" id="I7b-Ho-7Th"/>
-                                </constraints>
-                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
-                                <scopeButtonTitles>
-                                    <string>Title</string>
-                                    <string>Title</string>
-                                </scopeButtonTitles>
-                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EZV-7R-lTs">
-                                <rect key="frame" x="0.0" y="44" width="375" height="559"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="320" id="5hG-ru-FsL"/>
-                                    <constraint firstAttribute="width" constant="320" id="6lh-eM-5aP"/>
-                                    <constraint firstAttribute="height" constant="415" id="MMk-3f-wo7"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="416" id="aBV-PS-2IZ"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="320" id="cWc-CE-zbw"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="460" id="ifr-iK-6GX"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="603" id="2Dw-Cd-n8h"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="375" id="ggB-GL-iJ4"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="5hG-ru-FsL"/>
-                                        <exclude reference="6lh-eM-5aP"/>
-                                        <exclude reference="MMk-3f-wo7"/>
-                                        <exclude reference="aBV-PS-2IZ"/>
-                                    </mask>
-                                </variation>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="EZV-7R-lTs" secondAttribute="trailing" id="5SJ-X7-CKO"/>
-                            <constraint firstAttribute="trailing" secondItem="VLz-3v-DwS" secondAttribute="trailing" id="6KU-sM-IdF"/>
-                            <constraint firstItem="EZV-7R-lTs" firstAttribute="top" secondItem="VLz-3v-DwS" secondAttribute="bottom" id="6pw-su-Fiv"/>
-                            <constraint firstItem="EZV-7R-lTs" firstAttribute="top" secondItem="VLz-3v-DwS" secondAttribute="bottom" id="6q6-8J-jl5"/>
-                            <constraint firstItem="EZV-7R-lTs" firstAttribute="top" secondItem="VLz-3v-DwS" secondAttribute="bottom" id="9eq-Pb-QYM"/>
-                            <constraint firstItem="EZV-7R-lTs" firstAttribute="leading" secondItem="8vi-5W-nku" secondAttribute="leading" id="BFP-SD-vBS"/>
-                            <constraint firstItem="EZV-7R-lTs" firstAttribute="leading" secondItem="8vi-5W-nku" secondAttribute="leading" id="HzJ-ie-KTb"/>
-                            <constraint firstItem="EZV-7R-lTs" firstAttribute="top" secondItem="VLz-3v-DwS" secondAttribute="bottom" id="PQI-7E-F6p"/>
-                            <constraint firstItem="cD6-zx-6Kj" firstAttribute="top" secondItem="EZV-7R-lTs" secondAttribute="bottom" id="X1a-yW-3PC"/>
-                            <constraint firstItem="EZV-7R-lTs" firstAttribute="leading" secondItem="8vi-5W-nku" secondAttribute="leading" id="avH-7k-C25"/>
-                            <constraint firstItem="EZV-7R-lTs" firstAttribute="top" secondItem="VLz-3v-DwS" secondAttribute="bottom" id="c4T-YH-t8c"/>
-                            <constraint firstItem="EZV-7R-lTs" firstAttribute="top" secondItem="VLz-3v-DwS" secondAttribute="bottom" id="dAI-uk-aH1"/>
-                            <constraint firstItem="VLz-3v-DwS" firstAttribute="leading" secondItem="8vi-5W-nku" secondAttribute="leading" id="fDx-Bo-gkM"/>
-                            <constraint firstItem="cD6-zx-6Kj" firstAttribute="top" secondItem="EZV-7R-lTs" secondAttribute="bottom" id="gB4-YQ-skk"/>
-                            <constraint firstAttribute="trailing" secondItem="EZV-7R-lTs" secondAttribute="trailing" id="u4R-EX-smv"/>
-                            <constraint firstAttribute="trailing" secondItem="EZV-7R-lTs" secondAttribute="trailing" id="unn-wK-MFb"/>
-                            <constraint firstItem="VLz-3v-DwS" firstAttribute="top" secondItem="5SI-sM-Vl5" secondAttribute="bottom" id="yMj-2u-oyl"/>
+                            <constraint firstItem="EZV-7R-lTs" firstAttribute="leading" secondItem="8vi-5W-nku" secondAttribute="leading" id="6Vs-b6-cc0"/>
+                            <constraint firstItem="cD6-zx-6Kj" firstAttribute="top" secondItem="EZV-7R-lTs" secondAttribute="bottom" id="NiJ-er-jiA"/>
+                            <constraint firstItem="EZV-7R-lTs" firstAttribute="top" secondItem="5SI-sM-Vl5" secondAttribute="bottom" id="jzx-dA-MXO"/>
+                            <constraint firstAttribute="trailing" secondItem="EZV-7R-lTs" secondAttribute="trailing" id="sGq-KZ-IVp"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="5SJ-X7-CKO"/>
-                                <exclude reference="6pw-su-Fiv"/>
-                                <exclude reference="6q6-8J-jl5"/>
-                                <exclude reference="9eq-Pb-QYM"/>
-                                <exclude reference="BFP-SD-vBS"/>
-                                <exclude reference="HzJ-ie-KTb"/>
-                                <exclude reference="PQI-7E-F6p"/>
-                                <exclude reference="dAI-uk-aH1"/>
-                                <exclude reference="unn-wK-MFb"/>
-                                <exclude reference="gB4-YQ-skk"/>
-                            </mask>
-                        </variation>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="開催地" id="KKQ-QU-gaD">
+                    <navigationItem key="navigationItem" title="希望開催地" id="KKQ-QU-gaD">
                         <barButtonItem key="leftBarButtonItem" title="Item" id="NYf-Mp-Gqy"/>
                         <barButtonItem key="rightBarButtonItem" title="登録" id="0y9-9U-G0V">
                             <connections>
@@ -101,13 +50,12 @@
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="searchBar" destination="VLz-3v-DwS" id="qcq-0I-gFd"/>
                         <outlet property="tableView" destination="EZV-7R-lTs" id="4H4-HI-xMl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ss9-tC-28f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1001" y="501"/>
+            <point key="canvasLocation" x="1000.8" y="500.59970014992507"/>
         </scene>
         <!--Base Navigation View Controller-->
         <scene sceneID="Dhn-N2-j3M">
@@ -119,7 +67,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="I0T-aa-zDL" kind="relationship" relationship="rootViewController" id="opA-K9-rLS"/>
+                        <segue destination="cR8-IW-SBr" kind="relationship" relationship="rootViewController" id="01I-p9-USj"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cGF-vE-IWS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -135,11 +83,11 @@
                         <viewControllerLayoutGuide type="bottom" id="MTn-Ha-WoV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="DFv-Nl-gWl">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tWf-u0-kwG">
-                                <rect key="frame" x="0.0" y="44" width="375" height="559"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="415" id="3sd-aB-Mw2"/>
@@ -161,7 +109,7 @@
                                 </variation>
                             </tableView>
                             <searchBar contentMode="redraw" placeholder="ジャンル追加" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Idr-0W-LI4" customClass="BaseSearchBar" customModule="Eventory" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="98A-kb-Cd2"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="320" id="AhJ-zo-vlp"/>
@@ -235,4 +183,7 @@
             <point key="canvasLocation" x="262" y="501"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="01I-p9-USj"/>
+    </inferredMetricsTieBreakers>
 </document>
