@@ -28,7 +28,7 @@ class EventInfoViewController: BaseTableViewController {
             SVProgressHUD.showWithStatus(ServerConnectionMessage)
             self.refresh() {
                 SVProgressHUD.dismiss()
-                self.tableView.setContentOffset(CGPointZero, animated: true)
+                self.tableView.setContentOffset(CGPointMake(-2.0, 0.0), animated: true)
             }
         }
     }
