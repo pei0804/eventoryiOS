@@ -89,7 +89,4 @@ class Event: Object, Mappable {
             super.init(dateFormatter: formatter)
         }
     }
-    
-    
-    
 }
