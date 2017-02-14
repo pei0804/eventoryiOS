@@ -34,7 +34,6 @@ class BaseTableViewController: UITableViewController {
 
         self.scrollView = tableView
         self.addRefreshControl()
-        self.refresh()
 
         self.tableView.emptyDataSetSource = self
         self.tableView.emptyDataSetDelegate = self
