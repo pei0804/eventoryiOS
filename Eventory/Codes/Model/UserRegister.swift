@@ -13,7 +13,9 @@ class UserRegister {
     
     private init() {}
     
-    private var ud: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+    private var ud: NSUserDefaults {
+        return NSUserDefaults.standardUserDefaults()
+    }
     
     func getSettingStatus() -> Bool {
         guard let isSetting = self.ud.objectForKey(SettingClass.Status.getUserSettingKey()) as? Bool else {
@@ -24,26 +26,29 @@ class UserRegister {
     
     func setDefaultSettingStatus(isSetting: Bool) {
         if isSetting {
-            NSUserDefaults.standardUserDefaults().setObject(true, forKey: SettingClass.Status.getUserSettingKey());
-            NSUserDefaults.standardUserDefaults().synchronize();
+            self.ud.setObject(true, forKey: SettingClass.Status.getUserSettingKey())
+            self.ud.synchronize()
         }
     }
     
     func getUserEventInfoUpdateTime() -> String {
         guard let updatedAt = self.ud.objectForKey(userEventInfoUpdatedAt) as? String else {
-            return ""
+            return String()
         }
         return updatedAt
     }
     
     func setUserEventInfoUpdateTime() -> Void {
-        let now = NSDate()
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let updatedAt = formatter.stringFromDate(now)
-        
-        NSUserDefaults.standardUserDefaults().setObject(updatedAt, forKey: userEventInfoUpdatedAt);
-        NSUserDefaults.standardUserDefaults().synchronize();
+
+        dispatch_async(dispatch_get_main_queue(), {
+            let now = NSDate()
+            let formatter = NSDateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            let updatedAt = formatter.stringFromDate(now)
+
+            self.ud.setObject(updatedAt, forKey: userEventInfoUpdatedAt)
+            self.ud.synchronize()
+        })
     }
     
     func getUserSettingGenres() -> [String] {
@@ -84,12 +89,12 @@ class UserRegister {
         let userSetting :String = SettingClass.Place.getUserSettingKey()
 
         // 設定の一覧
-        NSUserDefaults.standardUserDefaults().setObject(initSettingPlaces, forKey: setting);
-        NSUserDefaults.standardUserDefaults().synchronize();
+        self.ud.setObject(initSettingPlaces, forKey: setting)
+        self.ud.synchronize()
 
         // 実際に検索に使うワード
-        NSUserDefaults.standardUserDefaults().setObject(newUserSettingPlaces, forKey: userSetting);
-        NSUserDefaults.standardUserDefaults().synchronize();
+        self.ud.setObject(newUserSettingPlaces, forKey: userSetting)
+        self.ud.synchronize()
 
         return
     }
@@ -126,12 +131,12 @@ class UserRegister {
         }
         
         // 設定の一覧
-        NSUserDefaults.standardUserDefaults().setObject(ragisterSetting, forKey: setting);
-        NSUserDefaults.standardUserDefaults().synchronize();
+        self.ud.setObject(ragisterSetting, forKey: setting)
+        self.ud.synchronize()
         
         // 実際に検索に使うワード
-        NSUserDefaults.standardUserDefaults().setObject(userRegisterSetting, forKey: userSetting);
-        NSUserDefaults.standardUserDefaults().synchronize();
+        self.ud.setObject(userRegisterSetting, forKey: userSetting)
+        self.ud.synchronize()
     }
     
     func insertNewSetting(inout ragisterSetting: [Dictionary<String, AnyObject>]?, newSetting: String) {
