@@ -20,15 +20,27 @@ class EventInfoViewController: BaseTableViewController {
         super.viewDidLoad()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-
-    override func becomeActive(notification: NSNotification) {
+    override func viewWillAppear(animated:Bool) {
         SVProgressHUD.showWithStatus(ServerConnectionMessage)
         self.refresh() {
             SVProgressHUD.dismiss()
         }
     }
 
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+
+    var isFirst = true
+    override func becomeActive(notification: NSNotification) {
+        if isFirst {
+            isFirst = false
+        } else {
+            SVProgressHUD.showWithStatus(ServerConnectionMessage)
+            self.refresh() {
+                SVProgressHUD.dismiss()
+            }
+        }
+    }
+    
 }
