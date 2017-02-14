@@ -24,7 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // TODO: パス確認用（削除必須）
 //        print(NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true))
         PushNotificationManager.sharedInstance.registerRemote()
-        UIApplication.sharedApplication().applicationIconBadgeNumber = -1
         
         // TODO ここらへんどうにかしたい
         if !UserRegister.sharedInstance.getSettingStatus() {

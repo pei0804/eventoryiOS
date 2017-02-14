@@ -45,7 +45,8 @@ class BaseTableViewController: UITableViewController {
         self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(20, 0, 0, 0)
 
         self.tableView.registerNib(UINib(nibName: EventInfoTableViewCellIdentifier, bundle: nil), forCellReuseIdentifier: EventInfoTableViewCellIdentifier)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.becomeActive(_:)), name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.viewWillEnterForeground(_:)), name: UIApplicationWillEnterForegroundNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.viewDidEnterBackground(_:)), name: UIApplicationDidEnterBackgroundNotification, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -79,7 +80,11 @@ class BaseTableViewController: UITableViewController {
     func handleRefresh() {
     }
 
-    func becomeActive(notification: NSNotification) {
+    func viewWillEnterForeground(notification: NSNotification?) {
+        UIApplication.sharedApplication().applicationIconBadgeNumber = -1
+    }
+
+    func viewDidEnterBackground(notification: NSNotification?) {
     }
 
     @IBAction func pullRefresh(refreshControl: UIRefreshControl) {

@@ -31,16 +31,13 @@ class EventInfoViewController: BaseTableViewController {
         super.didReceiveMemoryWarning()
     }
 
-    var isFirst = true
-    override func becomeActive(notification: NSNotification) {
-        if isFirst {
-            isFirst = false
-        } else {
+    override func viewWillEnterForeground(notification: NSNotification?) {
+        UIApplication.sharedApplication().applicationIconBadgeNumber = -1
+        if (self.isViewLoaded() && (self.view.window != nil)) {
             SVProgressHUD.showWithStatus(ServerConnectionMessage)
             self.refresh() {
                 SVProgressHUD.dismiss()
             }
         }
     }
-    
 }
