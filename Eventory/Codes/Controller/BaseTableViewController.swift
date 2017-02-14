@@ -20,6 +20,9 @@ class BaseTableViewController: UITableViewController {
         return CheckStatus.None
     }
 
+    // TODO いつか変える
+    var sawWebView: Bool = false
+
     var eventSummaries: [EventSummary]? {
         didSet {
             if let eventSummaries = self.eventSummaries where eventSummaries.count == 0 {
@@ -178,11 +181,15 @@ extension BaseTableViewController: SFSafariViewControllerDelegate, UIWebViewDele
         if #available(iOS 9.0, *) {
             let brow = SFSafariViewController(URL: NSURL(string: url)!, entersReaderIfAvailable: false)
             brow.delegate = self
+            // TODO いつか変える
+            self.sawWebView = true
             presentViewController(brow, animated: true, completion: nil)
         } else {
             let vc = UIStoryboard(name:"Main", bundle: nil).instantiateViewControllerWithIdentifier(EventPageWebViewControllerIdentifier) as! EventPageWebViewController
             vc.targetURL = url
             vc.navigationTitle = eventSummaries[indexPath.row].title
+            // TODO いつか変える
+            self.sawWebView = true
             presentViewController(vc, animated: true, completion: nil)
             // Fallback on earlier versions
         }

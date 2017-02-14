@@ -9,6 +9,7 @@
 import UIKit
 import SVProgressHUD
 import SwiftTask
+import SafariServices
 
 class EventInfoViewController: BaseTableViewController {
 
@@ -21,9 +22,14 @@ class EventInfoViewController: BaseTableViewController {
     }
 
     override func viewWillAppear(animated:Bool) {
-        SVProgressHUD.showWithStatus(ServerConnectionMessage)
-        self.refresh() {
-            SVProgressHUD.dismiss()
+        if sawWebView {
+            sawWebView = false
+        } else {
+            SVProgressHUD.showWithStatus(ServerConnectionMessage)
+            self.refresh() {
+                SVProgressHUD.dismiss()
+                self.tableView.setContentOffset(CGPointZero, animated: true)
+            }
         }
     }
 
