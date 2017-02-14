@@ -13,14 +13,14 @@ class MainMenuTabBarController: UITabBarController {
     var newEvent: Int = 0 {
         didSet {
             if newEvent > 0 {
-                self.tabBar.items![0].badgeValue = "New"
+                self.tabBar.items![0].badgeValue = "N"
             } else {
                 self.tabBar.items![0].badgeValue = nil
             }
         }
     }
     
-    let tabBarImages: [String] = ["new", "setting", "keep", "noKeep"]
+    let tabBarImages: [String] = ["new", "keep", "noKeep", "setting"]
     
     override func viewDidLoad() {
         super.viewDidLoad()

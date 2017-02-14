@@ -21,9 +21,9 @@
                     </tabBar>
                     <connections>
                         <segue destination="JLo-SF-Pfh" kind="relationship" relationship="viewControllers" id="Uup-ft-NGy"/>
-                        <segue destination="bMd-GZ-yAT" kind="relationship" relationship="viewControllers" id="x46-OR-xmp"/>
                         <segue destination="rxQ-nA-KR1" kind="relationship" relationship="viewControllers" id="yA3-MQ-Fxa"/>
                         <segue destination="zz8-zW-4FR" kind="relationship" relationship="viewControllers" id="geE-4W-OxO"/>
+                        <segue destination="bMd-GZ-yAT" kind="relationship" relationship="viewControllers" id="x46-OR-xmp"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G1c-qW-Cul" userLabel="First Responder" sceneMemberID="firstResponder"/>
