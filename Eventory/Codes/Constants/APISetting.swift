@@ -8,7 +8,10 @@
 
 // PROJECT -> Build Setting -> Other Swift Flags -> -D STAGING
 struct APISetting {
-    #if STAGING
+    #if LOCALHOST
+    static let scheme = "http://"
+    static let host = "localhost:8080"
+    #elseif STAGING
     static let scheme = "https://"
     static let host = "eventory-staging.appspot.com"
     #else // PRODUCTION
