@@ -47,6 +47,7 @@ class RegisterPlaceViewController: UIViewController {
 //            self.leftBarButton = UIBarButtonItem(title: "戻る", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(self.goBack(_:)))
             self.rightBarButton = UIBarButtonItem(title: "次へ", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(self.pushSubmitBtn(_:)))
             self.places = EventManager.sharedInstance.placesInitializer()
+            UserRegister.sharedInstance.setUserSettingRegister(EventManager.sharedInstance.genreInitializer(), settingClass: SettingClass.Genre)
         }
         self.navigationItem.leftBarButtonItem = self.leftBarButton
         self.navigationItem.rightBarButtonItem = self.rightBarButton
