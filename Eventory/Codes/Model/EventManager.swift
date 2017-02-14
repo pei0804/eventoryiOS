@@ -179,7 +179,7 @@ class EventManager {
         let API = APISetting.scheme + APISetting.host
 
         return Task<Float, String, NSError?> { progress, fulfill, reject, configure in
-            Alamofire.request(.GET, "\(API)/api/smt/events", parameters: ["updated_at": updatedAt, "places": places]).responseJSON { response in
+            Alamofire.request(.GET, "\(API)/api/smt/events", parameters: ["updated_at": updatedAt, "places": places.joinWithSeparator(",")]).responseJSON { response in
                 if let statusCode = response.response?.statusCode {
                     if statusCode == 304 {
                         fulfill("SUCCESS")
