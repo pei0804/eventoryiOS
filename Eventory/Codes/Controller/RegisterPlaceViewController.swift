@@ -66,14 +66,14 @@ class RegisterPlaceViewController: UIViewController {
 
     }
     
-    @IBAction func pushEditModeBtn(sender: AnyObject) {
-        if self.tableView.editing == false {
-            self.tableView.editing = true
-        } else {
-            self.tableView.editing = false
-        }
-    }
-    
+//    @IBAction func pushEditModeBtn(sender: AnyObject) {
+//        if self.tableView.editing == false {
+//            self.tableView.editing = true
+//        } else {
+//            self.tableView.editing = false
+//        }
+//    }
+
     @IBAction func pushSubmitBtn(sender: AnyObject) {
         UserRegister.sharedInstance.setUserSettingRegister(self.places, settingClass: SettingClass.Place)
         UserRegister.sharedInstance.setDefaultSettingStatus(true)
@@ -126,11 +126,11 @@ extension RegisterPlaceViewController: UITableViewDataSource {
         return UITableViewCell()
     }
     
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == UITableViewCellEditingStyle.Delete {
-            UserRegister.sharedInstance.deleteSetting(&self.places, index: indexPath.row)
-        }
-    }
+//    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+//        if editingStyle == UITableViewCellEditingStyle.Delete {
+//            UserRegister.sharedInstance.deleteSetting(&self.places, index: indexPath.row)
+//        }
+//    }
 }
 
 // MARK: - UITableViewDelegate
