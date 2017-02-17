@@ -43,6 +43,7 @@ class RegisterPlaceViewController: UIViewController {
             self.rightBarButton = UIBarButtonItem(title: "適用", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(self.pushSubmitBtn(_:)))
             self.places = UserRegister.sharedInstance.getSettingPlaces()
             self.checkCount = UserRegister.sharedInstance.getUserSettingPlaces().count
+            TerminalPreferenceManager.sharedInstance.resetUpdateTime()
         } else {
 //            self.leftBarButton = UIBarButtonItem(title: "戻る", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(self.goBack(_:)))
             self.rightBarButton = UIBarButtonItem(title: "次へ", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(self.pushSubmitBtn(_:)))

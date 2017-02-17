@@ -47,4 +47,12 @@ class TerminalPreferenceManager {
             }
         } catch {}
     }
+
+    func resetUpdateTime() -> Void {
+        do{
+            try self.realm.write {
+                self.realm.create(EventFetchUpdatedAt.self, value: ["updatedAt": "2015-10-10 10:10:10"], update: true)
+            }
+        } catch {}
+    }
 }
