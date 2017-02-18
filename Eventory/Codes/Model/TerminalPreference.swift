@@ -8,7 +8,7 @@
 
 import RealmSwift
 
-class EventFetchUpdatedAt: Object {
+class TerminalPreference: Object {
 
     dynamic var id: Int = 0
 
@@ -17,4 +17,10 @@ class EventFetchUpdatedAt: Object {
     override static func primaryKey() -> String? {
         return "id"
     }
+}
+
+enum TerminalPreferenceClass: Int {
+    case EventFetch = 0
+    case Tutorial = 1
+    case None = 100
 }

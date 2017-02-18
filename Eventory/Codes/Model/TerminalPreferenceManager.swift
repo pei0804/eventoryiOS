@@ -26,16 +26,16 @@ class TerminalPreferenceManager {
     }
 
 
-    func getUserEventInfoUpdateTime() -> String {
-        let eventFetchUpdatedAt: Results<EventFetchUpdatedAt> = self.realm.objects(EventFetchUpdatedAt)
-        guard let eventFetch = eventFetchUpdatedAt.first else {
-            self.setUserEventInfoUpdateTime()
+    func getUserEventInfoUpdateTime(terminalPreferenceClass: TerminalPreferenceClass) -> String {
+        let terminalPreference: Results<TerminalPreference> = self.realm.objects(TerminalPreference)
+        guard let eventFetch = terminalPreference.filter("id == \(terminalPreferenceClass.rawValue)").first else {
+            self.setUserEventInfoUpdateTime(terminalPreferenceClass)
             return ""
         }
         return eventFetch.updatedAt
     }
 
-    func setUserEventInfoUpdateTime() -> Void {
+    func setUserEventInfoUpdateTime(terminalPreferenceClass: TerminalPreferenceClass) -> Void {
         let now = NSDate()
         let formatter = NSDateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -43,7 +43,7 @@ class TerminalPreferenceManager {
 
         do{
             try self.realm.write {
-                self.realm.create(EventFetchUpdatedAt.self, value: ["updatedAt": updatedAt], update: true)
+                self.realm.create(TerminalPreference.self, value: ["id": terminalPreferenceClass.rawValue, "updatedAt": updatedAt], update: true)
             }
         } catch {}
     }
@@ -51,7 +51,7 @@ class TerminalPreferenceManager {
     func resetUpdateTime() -> Void {
         do{
             try self.realm.write {
-                self.realm.create(EventFetchUpdatedAt.self, value: ["updatedAt": "2015-10-10 10:10:10"], update: true)
+                self.realm.create(TerminalPreference.self, value: ["id": TerminalPreferenceClass.EventFetch.rawValue, "updatedAt": "2015-10-10 10:10:10"], update: true)
             }
         } catch {}
     }

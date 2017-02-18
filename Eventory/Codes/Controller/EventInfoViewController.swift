@@ -34,12 +34,21 @@ class EventInfoViewController: BaseTableViewController {
                 SVProgressHUD.dismiss()
                 self.tableView.setContentOffset(CGPointMake(0, -20), animated: true)
 
+                let updatedAt = TerminalPreferenceManager.sharedInstance.getUserEventInfoUpdateTime(TerminalPreferenceClass.Tutorial)
+                guard let eventSummaries = self.eventSummaries else {
+                    return
+                }
+                if(updatedAt != "" || eventSummaries.count < 0) {
+                    return
+                }
+
                 let skipView = CoachMarkSkipDefaultView()
                 skipView.setTitle("スキップ", forState: .Normal)
                 self.coachMarksController.skipView = skipView
                 self.coachMarksController.overlay.blurEffectStyle = UIBlurEffectStyle.Dark
                 self.coachMarksController.overlay.allowTap = true
                 self.coachMarksController.startOn(self)
+                TerminalPreferenceManager.sharedInstance.setUserEventInfoUpdateTime(TerminalPreferenceClass.Tutorial)
             }
         }
     }

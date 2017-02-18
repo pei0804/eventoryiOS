@@ -165,7 +165,7 @@ class EventManager {
     }
     
     func fetchNewEvent() -> Task<Float, String, NSError?> {
-        var updatedAt = TerminalPreferenceManager.sharedInstance.getUserEventInfoUpdateTime()
+        var updatedAt = TerminalPreferenceManager.sharedInstance.getUserEventInfoUpdateTime(TerminalPreferenceClass.EventFetch)
         let places = UserRegister.sharedInstance.getUserSettingPlaces()
         let result = self.realm.objects(Event)
 
@@ -217,7 +217,7 @@ class EventManager {
                     } catch {}
                 }
                 fulfill("SUCCESS")
-                TerminalPreferenceManager.sharedInstance.setUserEventInfoUpdateTime()
+                TerminalPreferenceManager.sharedInstance.setUserEventInfoUpdateTime(TerminalPreferenceClass.EventFetch)
             }
         }
     }
