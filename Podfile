@@ -14,6 +14,7 @@ pod 'SVProgressHUD', '~> 2.1.2'
 pod 'Firebase/Core'
 pod 'Firebase/Messaging'
 pod 'Instructions', '~> 0.5'
+pod 'BFPaperTabBarController'
 end
 
 

@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (3.5.1)
+  - BFPaperTabBarController (2.2.6)
   - DZNEmptyDataSet (1.8.1)
   - Firebase/Core (3.13.0):
     - FirebaseAnalytics (= 3.7.0)
@@ -39,6 +40,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 3.0)
+  - BFPaperTabBarController
   - DZNEmptyDataSet (~> 1.8.1)
   - Firebase/Core
   - Firebase/Messaging
@@ -50,6 +52,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Alamofire: 0dfba1184a543e2aa160f4e39cac4e8aba48d223
+  BFPaperTabBarController: b8e844b72c7063adbf498b92a09a5ba49249877a
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   Firebase: 5bc34d7b5ff5792e3386c8b28dc6265deeab0da4
   FirebaseAnalytics: 0d1b7d81d5021155be37702a94ba1ec16d45365d
@@ -65,6 +68,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   SwiftTask: 7fcd92f8ac16876e82c0e4ced0cea7e028456b6b
 
-PODFILE CHECKSUM: ff360564c7045254600dcc3f6e147a8f8ac47887
+PODFILE CHECKSUM: 698761841be5cb7d89344d3bd73a43ed1ff32b69
 
 COCOAPODS: 1.0.1

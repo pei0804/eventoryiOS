@@ -12,8 +12,8 @@ struct Colors {
     
     // 現状は色にネーミングで意味を持たせない
     // いずれも番号がついていないものが一番濃い色にしている
-    static let main     = UIColorFromRGB(0xE67E22)
-    static let main2    = UIColorFromRGB(0xFFE8D3)
+    static let main     = UIColorFromRGB(0xE47E30)
+    static let main2    = UIColorFromRGB(0xF39C12)
     
     static let noKeep   = UIColorFromRGB(0x95a5a6)
     static let noKeep2  = UIColorFromRGB(0xEAEAEA)

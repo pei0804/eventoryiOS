@@ -24,6 +24,7 @@
 		6C6A27011D8E614D00F479CA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6A27001D8E614D00F479CA /* BaseViewController.swift */; };
 		6C88DF471E165BA000203C85 /* KeepButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C88DF461E165BA000203C85 /* KeepButton.swift */; };
 		6C8FC9D61E34D1BD00A88A0A /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C8FC9D51E34D1BD00A88A0A /* BaseTableViewController.swift */; };
+		6C93CBF51E58AC80003C688B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C93CBF41E58AC80003C688B /* Images.xcassets */; };
 		6CA92BEE1E3B0DA300F0823F /* APISetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA92BED1E3B0DA300F0823F /* APISetting.swift */; };
 		6CA95B0D1D6729BF00983152 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA95B0C1D6729BF00983152 /* AppDelegate.swift */; };
 		6CA95B121D6729BF00983152 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CA95B101D6729BF00983152 /* Main.storyboard */; };
@@ -37,7 +38,6 @@
 		6CA95B331D6749EC00983152 /* EventSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA95B321D6749EC00983152 /* EventSummary.swift */; };
 		6CB258D21E418920006C6CBC /* EventPageWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB258D11E418920006C6CBC /* EventPageWebViewController.swift */; };
 		6CC5C15D1D90B57D00683EBB /* AppIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CC5C15C1D90B57D00683EBB /* AppIcon.xcassets */; };
-		6CC5C15F1D90BB9B00683EBB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CC5C15E1D90BB9B00683EBB /* Images.xcassets */; };
 		6CD322C71D7EAB1B004B0851 /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD322C61D7EAB1B004B0851 /* Define.swift */; };
 		6CD322C91D7EAFCF004B0851 /* CheckListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD322C81D7EAFCF004B0851 /* CheckListTableViewCell.swift */; };
 		6CD322CD1D83F056004B0851 /* UserRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD322CC1D83F056004B0851 /* UserRegister.swift */; };
@@ -68,6 +68,7 @@
 		6C6A27001D8E614D00F479CA /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		6C88DF461E165BA000203C85 /* KeepButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeepButton.swift; sourceTree = "<group>"; };
 		6C8FC9D51E34D1BD00A88A0A /* BaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
+		6C93CBF41E58AC80003C688B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6CA92BED1E3B0DA300F0823F /* APISetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APISetting.swift; sourceTree = "<group>"; };
 		6CA95B091D6729BF00983152 /* Eventory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Eventory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CA95B0C1D6729BF00983152 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -83,7 +84,6 @@
 		6CA95B321D6749EC00983152 /* EventSummary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventSummary.swift; sourceTree = "<group>"; };
 		6CB258D11E418920006C6CBC /* EventPageWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPageWebViewController.swift; sourceTree = "<group>"; };
 		6CC5C15C1D90B57D00683EBB /* AppIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcon.xcassets; sourceTree = "<group>"; };
-		6CC5C15E1D90BB9B00683EBB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6CCD65AD1E250A230017826B /* Eventory.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Eventory.entitlements; sourceTree = "<group>"; };
 		6CD322C61D7EAB1B004B0851 /* Define.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Define.swift; sourceTree = "<group>"; };
 		6CD322C81D7EAFCF004B0851 /* CheckListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckListTableViewCell.swift; sourceTree = "<group>"; };
@@ -253,7 +253,7 @@
 				6CA95B261D672D4500983152 /* storyboard */,
 				6CA95B291D672DD200983152 /* xibs */,
 				6CC5C15C1D90B57D00683EBB /* AppIcon.xcassets */,
-				6CC5C15E1D90BB9B00683EBB /* Images.xcassets */,
+				6C93CBF41E58AC80003C688B /* Images.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -338,11 +338,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				6CA95B2B1D672FDA00983152 /* EventInfoTableViewCell.xib in Resources */,
+				6C93CBF51E58AC80003C688B /* Images.xcassets in Resources */,
 				6C19C4121E3EC4BB000FE66C /* GoogleService-Info.plist in Resources */,
 				6CA95B171D6729BF00983152 /* LaunchScreen.storyboard in Resources */,
 				6CC5C15D1D90B57D00683EBB /* AppIcon.xcassets in Resources */,
 				6CA95B121D6729BF00983152 /* Main.storyboard in Resources */,
-				6CC5C15F1D90BB9B00683EBB /* Images.xcassets in Resources */,
 				6C4E1F171D7D39BB00A2BE13 /* CheckListTableViewCell.xib in Resources */,
 				6C4E1F151D7D36A600A2BE13 /* Register.storyboard in Resources */,
 			);
