@@ -22,7 +22,7 @@ class EventInfoViewController: BaseTableViewController {
         super.viewDidLoad()
         self.coachMarksController.dataSource = self
     }
-    
+
     let coachMarksController = CoachMarksController()
 
     override func viewWillAppear(animated:Bool) {
@@ -38,17 +38,17 @@ class EventInfoViewController: BaseTableViewController {
                 guard let eventSummaries = self.eventSummaries else {
                     return
                 }
-                if(updatedAt != "" || eventSummaries.count < 0) {
-                    return
+                if updatedAt == "" && eventSummaries.count > 0 {
+                    let skipView = CoachMarkSkipDefaultView()
+                    skipView.setTitle("スキップ", forState: .Normal)
+                    self.coachMarksController.skipView = skipView
+                    if #available(iOS 9.0, *) {
+                        self.coachMarksController.overlay.blurEffectStyle = UIBlurEffectStyle.Dark
+                    }
+                    self.coachMarksController.overlay.allowTap = true
+                    self.coachMarksController.startOn(self)
+                    TerminalPreferenceManager.sharedInstance.setUserEventInfoUpdateTime(TerminalPreferenceClass.Tutorial)
                 }
-
-                let skipView = CoachMarkSkipDefaultView()
-                skipView.setTitle("スキップ", forState: .Normal)
-                self.coachMarksController.skipView = skipView
-                self.coachMarksController.overlay.blurEffectStyle = UIBlurEffectStyle.Dark
-                self.coachMarksController.overlay.allowTap = true
-                self.coachMarksController.startOn(self)
-                TerminalPreferenceManager.sharedInstance.setUserEventInfoUpdateTime(TerminalPreferenceClass.Tutorial)
             }
         }
     }
@@ -68,7 +68,7 @@ class EventInfoViewController: BaseTableViewController {
             }
         }
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -108,19 +108,12 @@ extension EventInfoViewController: CoachMarksControllerDataSource {
         case 3:
             return coachMarksController.helper.coachMarkForView(self.tabBarController?.tabBar) { (frame: CGRect) -> UIBezierPath in
                 let view = self.tabBarController?.tabBar.items![0].valueForKey("view") as! UIView
-                print(self.tableView.layer.position)
-
                 let cellRect = CGRectOffset(view.layer.bounds,view.frame.origin.x, self.tableView.frame.maxY)
                 return UIBezierPath(rect: cellRect)
             }
         case 4:
             return coachMarksController.helper.coachMarkForView(self.tabBarController?.tabBar) { (frame: CGRect) -> UIBezierPath in
-                // This will make a cutoutPath matching the shape of
-                // the component (no padding, no rounded corners).
-
                 let view = self.tabBarController?.tabBar.items![3].valueForKey("view") as! UIView
-                print(self.tableView.layer.position)
-
                 let cellRect = CGRectOffset(view.layer.bounds,view.frame.origin.x, self.tableView.frame.maxY)
                 return UIBezierPath(rect: cellRect)
             }
@@ -149,8 +142,8 @@ extension EventInfoViewController: CoachMarksControllerDataSource {
         }
 
         let coachViews = coachMarksController.helper.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation, hintText: hintText, nextText: nil)
-
+        
         return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
-
+        
     }
 }

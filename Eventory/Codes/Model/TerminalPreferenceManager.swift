@@ -29,7 +29,9 @@ class TerminalPreferenceManager {
     func getUserEventInfoUpdateTime(terminalPreferenceClass: TerminalPreferenceClass) -> String {
         let terminalPreference: Results<TerminalPreference> = self.realm.objects(TerminalPreference)
         guard let eventFetch = terminalPreference.filter("id == \(terminalPreferenceClass.rawValue)").first else {
-            self.setUserEventInfoUpdateTime(terminalPreferenceClass)
+            if terminalPreferenceClass == .EventFetch {
+                self.setUserEventInfoUpdateTime(terminalPreferenceClass)
+            }
             return ""
         }
         return eventFetch.updatedAt
