@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "7A7E398A0648EEC6099C701CEB6311F6458722D1",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "7A7E398A0648EEC6099C701CEB6311F6458722D1" : 9223372036854775807,
+    "E46058653DA2B6705FA7F1E9B5893D14CBB1EF34" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "235A0D14-9F61-4BB7-AC51-1CB4440179A9",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "7A7E398A0648EEC6099C701CEB6311F6458722D1" : "eventoryiOS\/",
+    "E46058653DA2B6705FA7F1E9B5893D14CBB1EF34" : "LDSplashView\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Eventory",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Eventory.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/tikasan\/eventoryiOS.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7A7E398A0648EEC6099C701CEB6311F6458722D1"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/tikasan\/LDSplashView.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E46058653DA2B6705FA7F1E9B5893D14CBB1EF34"
+    }
+  ]
+}
