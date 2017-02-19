@@ -42,7 +42,7 @@ class EventInfoViewController: BaseTableViewController {
                     let skipView = CoachMarkSkipDefaultView()
                     skipView.setTitle("スキップ", forState: .Normal)
                     self.coachMarksController.skipView = skipView
-                    if #available(iOS 9.0, *) {
+                    if #available(iOS 10.0, *) {
                         self.coachMarksController.overlay.blurEffectStyle = UIBlurEffectStyle.Dark
                     }
                     self.coachMarksController.overlay.allowTap = true
