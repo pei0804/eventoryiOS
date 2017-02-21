@@ -18,7 +18,7 @@ class SettingViewController: UIViewController {
             }
         }
 
-    let settingClasses: [Dictionary<String, String>] = [
+    var settingClasses: [Dictionary<String, String>] = [
         [
             "name": "興味のあるジャンル",
             "controller": RegisterGenreViewControllerIdentifier
@@ -28,9 +28,14 @@ class SettingViewController: UIViewController {
             "controller": RegisterPlaceViewControllerIdentifier
         ],
         [
-            "name": "",
-            "controller":""
+            "new": "false"
+        ],
+        [
+            "name": "レビューする",
+            "url": "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=1194029971&pageNumber=0&sortOrdering=2&mt=8"
         ]
+        // 1194029971
+
     ]
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +44,7 @@ class SettingViewController: UIViewController {
         self.tableView.separatorInset = UIEdgeInsetsZero
         self.tableView.layoutMargins = UIEdgeInsetsZero
         self.tableView.tableFooterView = UIView()
+        self.tableView.rowHeight = 50
     }
 
     override func viewWillAppear(animated:Bool) {
@@ -66,6 +72,8 @@ extension SettingViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.settingClasses.count
     }
+
+
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier(SettingTableViewCellIdentifier, forIndexPath: indexPath)
@@ -74,18 +82,25 @@ extension SettingViewController: UITableViewDataSource {
             cell.textLabel?.text = self.settingClasses[indexPath.row]["name"]
             cell.accessoryType = .DisclosureIndicator
             return cell
-        } else {
+        } else if indexPath.row == 2 {
             if newEventCount > 0 {
                 cell.textLabel?.textColor = UIColor.whiteColor()
                 cell.backgroundColor = Colors.main2
                 cell.textLabel?.text = "新着情報：\(newEventCount)件"
+                self.settingClasses[indexPath.row]["new"] = "true"
                 return cell
             }
             cell.textLabel?.textColor = UIColor.blackColor()
             cell.backgroundColor = UIColor.whiteColor()
             cell.textLabel?.text = "新着情報：なし"
+            self.settingClasses[indexPath.row]["new"] = "false"
+            return cell
+        } else if indexPath.row == 3 {
+            cell.textLabel?.text = self.settingClasses[indexPath.row]["name"]
+            cell.accessoryType = .DisclosureIndicator
             return cell
         }
+        return UITableViewCell()
     }
 }
 
@@ -108,6 +123,12 @@ extension SettingViewController: UITableViewDelegate {
                 vc.settingStatus = true
                 self.navigationController?.pushViewController(vc, animated: true)
             }
+        } else if let url = settingClasses[indexPath.row]["url"] {
+            let app:UIApplication = UIApplication.sharedApplication()
+            app.openURL(NSURL(string: url)!)
+        } else if let _ = settingClasses[indexPath.row]["new"] where settingClasses[indexPath.row]["new"] == "true" {
+            let vc = self.tabBarController! as! MainMenuTabBarController
+            vc.selectTabAtIndex(0, animated: true)
         }
     }
 }

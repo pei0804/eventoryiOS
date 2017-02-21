@@ -15,6 +15,7 @@ pod 'Firebase/Core'
 pod 'Firebase/Messaging'
 pod 'Instructions', '~> 0.5'
 pod 'BFPaperTabBarController'
+pod ‘iRate’
 end
 
 

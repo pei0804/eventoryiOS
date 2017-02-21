@@ -28,6 +28,7 @@ PODS:
   - Instructions (0.5.0):
     - Instructions/Core (= 0.5.0)
   - Instructions/Core (0.5.0)
+  - iRate (1.11.7)
   - ObjectMapper (0.19)
   - Protobuf (3.2.0)
   - Realm (2.1.2):
@@ -45,6 +46,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Messaging
   - Instructions (~> 0.5)
+  - iRate
   - ObjectMapper (~> 0.17)
   - RealmSwift (~> 2.1.2)
   - SVProgressHUD (~> 2.1.2)
@@ -61,6 +63,7 @@ SPEC CHECKSUMS:
   FirebaseMessaging: df8267f378580a24174ce7861233aa11d5c90109
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   Instructions: 6976f674ce788aefec475be6f18500572f1645d4
+  iRate: adae3f183d83c925ac42d7a2e86e89e838963f57
   ObjectMapper: a88114e5df20f055da63029f25cbc01014847c91
   Protobuf: 745f59e122e5de98d4d7ef291e264a0eef80f58e
   Realm: efe855f4d977c8ce5a82d3116d9f1ff155a6550c
@@ -68,6 +71,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   SwiftTask: 7fcd92f8ac16876e82c0e4ced0cea7e028456b6b
 
-PODFILE CHECKSUM: 698761841be5cb7d89344d3bd73a43ed1ff32b69
+PODFILE CHECKSUM: cad234239d8755b8f747e075d5788eca2292e1b4
 
 COCOAPODS: 1.0.1

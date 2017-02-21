@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import SwiftTask
 import SVProgressHUD
+import iRate
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+
+        iRate.sharedInstance().applicationBundleID = "xyz.ganbaruman.Eventory"
+        iRate.sharedInstance().onlyPromptIfLatestVersion = false
+        iRate.sharedInstance().usesUntilPrompt = 10
+        iRate.sharedInstance().eventsUntilPrompt = 0
+        iRate.sharedInstance().daysUntilPrompt = 3
 
         SVProgressHUD.setBackgroundColor(UIColor.whiteColor())
         SVProgressHUD.setBackgroundLayerColor(UIColor.whiteColor())
