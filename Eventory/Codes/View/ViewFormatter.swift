@@ -11,15 +11,15 @@ import Foundation
 class ViewFormaatter {
     static let sharedInstance = ViewFormaatter()
     
-    private init() {}
+    fileprivate init() {}
     
-    func setEventDate(eventSummary: EventSummary) -> String {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.locale = NSLocale(localeIdentifier: "ja_JP")
+    func setEventDate(_ eventSummary: EventSummary) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ja_JP")
         dateFormatter.dateFormat = "yyyy年MM月dd日 HH:mm"
-        let startDate: String = dateFormatter.stringFromDate(eventSummary.startAt)
+        let startDate: String = dateFormatter.string(from: eventSummary.startAt as Date)
         dateFormatter.dateFormat = "MM月dd日 HH:mm"
-        let endDate: String = dateFormatter.stringFromDate(eventSummary.endAt)
+        let endDate: String = dateFormatter.string(from: eventSummary.endAt as Date)
         return "\(startDate)〜\(endDate)"
     }
 }

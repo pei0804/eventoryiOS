@@ -1,5 +1,8 @@
 PODS:
   - Alamofire (4.3.0)
+  - AlamofireObjectMapper (4.1.0):
+    - Alamofire (~> 4.1)
+    - ObjectMapper (~> 2.0)
   - BFPaperTabBarController (2.2.6)
   - DZNEmptyDataSet (1.8.1)
   - Firebase/Core (3.14.0):
@@ -37,11 +40,13 @@ PODS:
   - RealmSwift (2.1.2):
     - Realm (= 2.1.2)
   - SVProgressHUD (2.1.2)
+  - SVWebViewController (1.0)
   - SwiftTask (5.0.0)
   - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
   - Alamofire (from `https://github.com/Alamofire/Alamofire.git`, branch `master`)
+  - AlamofireObjectMapper
   - BFPaperTabBarController
   - DZNEmptyDataSet (~> 1.8.1)
   - Firebase/Core
@@ -51,6 +56,7 @@ DEPENDENCIES:
   - ObjectMapper (~> 2.2.0)
   - RealmSwift (~> 2.1.2)
   - SVProgressHUD (~> 2.1.2)
+  - SVWebViewController
   - SwiftTask (from `https://github.com/ReactKit/SwiftTask`, branch `swift/3.0`)
   - SwiftyJSON (~> 3.1.1)
 
@@ -78,6 +84,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: 1f72088aff8f6b40828dadd61be2e9a31beca01e
+  AlamofireObjectMapper: 435adc82f5b367679bd9e71c4974a54efd0b2521
   BFPaperTabBarController: b8e844b72c7063adbf498b92a09a5ba49249877a
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   Firebase: 85a581fb04e44f63ae9f4fbc8d6dabf4a4c18653
@@ -93,9 +100,10 @@ SPEC CHECKSUMS:
   Realm: efe855f4d977c8ce5a82d3116d9f1ff155a6550c
   RealmSwift: 17d6ee30b6f9df86364408c2197492e33bfea567
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
+  SVWebViewController: c36dda7326e81fcae0abf5d02bf7bbf7e41be901
   SwiftTask: 7fcd92f8ac16876e82c0e4ced0cea7e028456b6b
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 9ddbe00a841d65f45e044e1120fd7f57e82de4c9
+PODFILE CHECKSUM: ceea2074fb25bd7e89de41c766891ba5688cd6b3
 
 COCOAPODS: 1.0.1

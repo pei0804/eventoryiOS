@@ -18,7 +18,6 @@ class TerminalPreferenceManager {
     private init() {}
 
     private var realm: Realm {
-
         guard let realm = try? Realm() else {
             fatalError("Realm error")
         }
@@ -26,10 +25,10 @@ class TerminalPreferenceManager {
     }
 
 
-    func getUserEventInfoUpdateTime(terminalPreferenceClass: TerminalPreferenceClass) -> String {
-        let terminalPreference: Results<TerminalPreference> = self.realm.objects(TerminalPreference)
+    func getUserEventInfoUpdateTime(_ terminalPreferenceClass: TerminalPreferenceClass) -> String {
+        let terminalPreference: Results<TerminalPreference> = self.realm.objects(TerminalPreference.self)
         guard let eventFetch = terminalPreference.filter("id == \(terminalPreferenceClass.rawValue)").first else {
-            if terminalPreferenceClass == .EventFetch {
+            if terminalPreferenceClass == .eventFetch {
                 self.setUserEventInfoUpdateTime(terminalPreferenceClass)
             }
             return ""
@@ -37,11 +36,11 @@ class TerminalPreferenceManager {
         return eventFetch.updatedAt
     }
 
-    func setUserEventInfoUpdateTime(terminalPreferenceClass: TerminalPreferenceClass) -> Void {
+    func setUserEventInfoUpdateTime(_ terminalPreferenceClass: TerminalPreferenceClass) -> Void {
         let now = NSDate()
-        let formatter = NSDateFormatter()
+        let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let updatedAt = formatter.stringFromDate(now)
+        let updatedAt = formatter.string(from: now as Date)
 
         do{
             try self.realm.write {
@@ -53,7 +52,10 @@ class TerminalPreferenceManager {
     func resetUpdateTime() -> Void {
         do{
             try self.realm.write {
-                self.realm.create(TerminalPreference.self, value: ["id": TerminalPreferenceClass.EventFetch.rawValue, "updatedAt": "2015-10-10 10:10:10"], update: true)
+                self.realm.create(TerminalPreference.self, value: [
+                    "id": TerminalPreferenceClass.eventFetch.rawValue,
+                    "updatedAt": "2015-10-10 10:10:10"
+                    ], update: true)
             }
         } catch {}
     }

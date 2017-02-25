@@ -27,8 +27,8 @@ class MainMenuTabBarController: BFPaperTabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.selectedIndex = 0
-        self.tabBar.tintColor = UIColor.whiteColor()
-        self.tabBar.backgroundColor = UIColor.whiteColor()
+        self.tabBar.tintColor = UIColor.white
+        self.tabBar.backgroundColor = UIColor.white
 //        self.updateBadge(EventManager.sharedInstance.getSelectNewEventAll().count)
 
         guard let items = self.tabBar.items else {
@@ -44,10 +44,10 @@ class MainMenuTabBarController: BFPaperTabBarController {
         self.underlineColor = Colors.main2
         self.underlineThickness = tabBar.frame.height
         
-        for (i,item) in items.enumerate() {
-            item.image = UIImage(named: "\(tabBarImages[i])Off.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
-            item.selectedImage = UIImage(named: "\(tabBarImages[i])On.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
-            item.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Avenir-Medium", size: 9)!], forState: .Normal)
+        for (i,item) in items.enumerated() {
+            item.image = UIImage(named: "\(tabBarImages[i])Off.png")!.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+            item.selectedImage = UIImage(named: "\(tabBarImages[i])On.png")!.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+            item.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Avenir-Medium", size: 9)!], for: UIControlState())
         }
     }
     

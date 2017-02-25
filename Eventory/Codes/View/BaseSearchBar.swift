@@ -13,7 +13,7 @@ class BaseSearchBar: UISearchBar {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.layer.cornerRadius = 4.0
-        self.frame = CGRectMake(0, 0, 320, 40)
+        self.frame = CGRect(x: 0, y: 0, width: 320, height: 40)
         self.tintColor = Colors.main
     }
 }

@@ -41,17 +41,17 @@ class SettingViewController: UIViewController {
         super.viewDidLoad()
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        self.tableView.separatorInset = UIEdgeInsetsZero
-        self.tableView.layoutMargins = UIEdgeInsetsZero
+        self.tableView.separatorInset = UIEdgeInsets.zero
+        self.tableView.layoutMargins = UIEdgeInsets.zero
         self.tableView.tableFooterView = UIView()
         self.tableView.rowHeight = 50
     }
 
-    override func viewWillAppear(animated:Bool) {
+    override func viewWillAppear(_ animated:Bool) {
         super.viewWillAppear(animated)
 
         if let indexPathForSelectedRow = tableView.indexPathForSelectedRow {
-            self.tableView.deselectRowAtIndexPath(indexPathForSelectedRow, animated: true)
+            self.tableView.deselectRow(at: indexPathForSelectedRow, animated: true)
         }
         self.newEventCount = EventManager.sharedInstance.getSelectNewEventAll().count
     }
@@ -65,39 +65,39 @@ class SettingViewController: UIViewController {
 
 extension SettingViewController: UITableViewDataSource {
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.settingClasses.count
     }
 
 
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier(SettingTableViewCellIdentifier, forIndexPath: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: SettingTableViewCellIdentifier, for: indexPath)
 
         if indexPath.row <= 1 {
             cell.textLabel?.text = self.settingClasses[indexPath.row]["name"]
-            cell.accessoryType = .DisclosureIndicator
+            cell.accessoryType = .disclosureIndicator
             return cell
         } else if indexPath.row == 2 {
             if newEventCount > 0 {
-                cell.textLabel?.textColor = UIColor.whiteColor()
+                cell.textLabel?.textColor = UIColor.white
                 cell.backgroundColor = Colors.main2
                 cell.textLabel?.text = "新着情報：\(newEventCount)件"
                 self.settingClasses[indexPath.row]["new"] = "true"
                 return cell
             }
-            cell.textLabel?.textColor = UIColor.blackColor()
-            cell.backgroundColor = UIColor.whiteColor()
+            cell.textLabel?.textColor = UIColor.black
+            cell.backgroundColor = UIColor.white
             cell.textLabel?.text = "新着情報：なし"
             self.settingClasses[indexPath.row]["new"] = "false"
             return cell
         } else if indexPath.row == 3 {
             cell.textLabel?.text = self.settingClasses[indexPath.row]["name"]
-            cell.accessoryType = .DisclosureIndicator
+            cell.accessoryType = .disclosureIndicator
             return cell
         }
         return UITableViewCell()
@@ -109,26 +109,26 @@ extension SettingViewController: UITableViewDataSource {
 
 extension SettingViewController: UITableViewDelegate {
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let nextVc = settingClasses[indexPath.row]["controller"] {
            
             // どのコントローラに遷移するか判定している
             // 既存にあるRegister系は少し煩雑になっているが、初期登録アクセスかを判定しているだけ
             if nextVc == RegisterPlaceViewControllerIdentifier {
-                let vc = UIStoryboard(name:"Register", bundle: nil).instantiateViewControllerWithIdentifier(nextVc) as! RegisterPlaceViewController
+                let vc = UIStoryboard(name:"Register", bundle: nil).instantiateViewController(withIdentifier: nextVc) as! RegisterPlaceViewController
                 vc.settingStatus = true
                 self.navigationController?.pushViewController(vc, animated: true)
             } else if nextVc == RegisterGenreViewControllerIdentifier {
-                let vc = UIStoryboard(name:"Register", bundle: nil).instantiateViewControllerWithIdentifier(nextVc) as! RegisterGenreViewController
+                let vc = UIStoryboard(name:"Register", bundle: nil).instantiateViewController(withIdentifier: nextVc) as! RegisterGenreViewController
                 vc.settingStatus = true
                 self.navigationController?.pushViewController(vc, animated: true)
             }
         } else if let url = settingClasses[indexPath.row]["url"] {
-            let app:UIApplication = UIApplication.sharedApplication()
-            app.openURL(NSURL(string: url)!)
-        } else if let _ = settingClasses[indexPath.row]["new"] where settingClasses[indexPath.row]["new"] == "true" {
+            let app:UIApplication = UIApplication.shared
+            app.openURL(URL(string: url)!)
+        } else if let _ = settingClasses[indexPath.row]["new"], settingClasses[indexPath.row]["new"] == "true" {
             let vc = self.tabBarController! as! MainMenuTabBarController
-            vc.selectTabAtIndex(0, animated: true)
+            vc.selectTab(at: 0, animated: true)
         }
     }
 }

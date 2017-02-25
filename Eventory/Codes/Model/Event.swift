@@ -9,7 +9,7 @@
 import RealmSwift
 import ObjectMapper
 
-class Event: Object, Mappable {
+class Event: Object {
     
     // 管理ID
     dynamic var id: Int = 0
@@ -45,10 +45,10 @@ class Event: Object, Mappable {
     dynamic var place: String = ""
     
     // 開催日時
-    dynamic var startAt: NSDate = NSDate()
+    dynamic var startAt: Date = Date()
     
     // 終了日時
-    dynamic var endAt: NSDate = NSDate()
+    dynamic var endAt: Date = Date()
     
     // 分別ステータス
     dynamic var checkStatus: Int = 0
@@ -57,11 +57,13 @@ class Event: Object, Mappable {
         return "id"
     }
     
-    required convenience init?(_ map: Map) {
+    required convenience init?(map: Map) {
         self.init()
-        mapping(map)
+        mapping(map: map)
     }
-    
+}
+
+extension Event: Mappable {
     func mapping(map: Map) {
         id              <- map["id"]
         eventId         <- map["event_id"]
@@ -71,22 +73,22 @@ class Event: Object, Mappable {
         url             <- map["url"]
         limit           <- map["limit"]
         accepted        <- map["accepted"]
-//        waitlisted      <- map["waitlisted"]
+        //        waitlisted      <- map["waitlisted"]
         address         <- map["address"]
         place           <- map["place"]
-        startAt         <- (map["start_at"], CustomDateFormatTransform())
-        endAt           <- (map["end_at"], CustomDateFormatTransform())
+        startAt         <- (map["start_at"], EntryDateTransform())
+        endAt           <- (map["end_at"], EntryDateTransform())
     }
-    
-    class CustomDateFormatTransform: DateFormatterTransform {
-        
-        init() {
-            let formatter = NSDateFormatter()
-            formatter.locale = NSLocale(localeIdentifier: "ja_JP")
-            formatter.timeZone = NSTimeZone(name: "JPN")
-            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
-            
-            super.init(dateFormatter: formatter)
+}
+
+class EntryDateTransform : DateTransform {
+    override func transformFromJSON(_ value: Any?) -> Date? {
+        if let dateStr = value as? String {
+            return Date.dateWithString(
+                dateStr,
+                format: "yyyy-MM-dd'T'HH:mm:ss'Z" ,
+                locale : Locale(identifier: "ja_JP"))
         }
+        return nil
     }
 }

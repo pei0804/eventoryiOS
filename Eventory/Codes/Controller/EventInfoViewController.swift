@@ -15,56 +15,56 @@ import Instructions
 class EventInfoViewController: BaseTableViewController {
 
     override var viewPageClass: CheckStatus {
-        return CheckStatus.NoCheck
+        return CheckStatus.noCheck
     }
 
+    let coachMarksController = CoachMarksController()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.coachMarksController.dataSource = self
     }
 
-    let coachMarksController = CoachMarksController()
 
-    override func viewWillAppear(animated:Bool) {
+    override func viewWillAppear(_ animated:Bool) {
         if sawWebView {
             sawWebView = false
         } else {
-            SVProgressHUD.showWithStatus(ServerConnectionMessage)
+            SVProgressHUD.show(withStatus: ServerConnectionMessage)
             self.refresh() {
                 SVProgressHUD.dismiss()
-                self.tableView.setContentOffset(CGPointMake(0, -20), animated: true)
+                self.tableView.setContentOffset(CGPoint(x: 0, y: -20), animated: true)
 
-                let updatedAt = TerminalPreferenceManager.sharedInstance.getUserEventInfoUpdateTime(TerminalPreferenceClass.Tutorial)
+                let updatedAt = TerminalPreferenceManager.sharedInstance.getUserEventInfoUpdateTime(TerminalPreferenceClass.tutorial)
                 guard let eventSummaries = self.eventSummaries else {
                     return
                 }
                 if updatedAt == "" && eventSummaries.count > 0 {
                     let skipView = CoachMarkSkipDefaultView()
-                    skipView.setTitle("スキップ", forState: .Normal)
+                    skipView.setTitle("スキップ", for: .normal)
                     self.coachMarksController.skipView = skipView
                     if #available(iOS 10.0, *) {
-                        self.coachMarksController.overlay.blurEffectStyle = UIBlurEffectStyle.Dark
+                        self.coachMarksController.overlay.blurEffectStyle = UIBlurEffectStyle.dark
                     }
                     self.coachMarksController.overlay.allowTap = true
                     self.coachMarksController.startOn(self)
-                    TerminalPreferenceManager.sharedInstance.setUserEventInfoUpdateTime(TerminalPreferenceClass.Tutorial)
+                    TerminalPreferenceManager.sharedInstance.setUserEventInfoUpdateTime(TerminalPreferenceClass.tutorial)
                 }
             }
         }
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.coachMarksController.stop(immediately: true)
     }
 
-    override func viewWillEnterForeground(notification: NSNotification?) {
-        UIApplication.sharedApplication().applicationIconBadgeNumber = -1
-        if (self.isViewLoaded() && (self.view.window != nil)) {
-            SVProgressHUD.showWithStatus(ServerConnectionMessage)
+    override func viewWillEnterForeground(_ notification: Notification?) {
+        UIApplication.shared.applicationIconBadgeNumber = -1
+        if (self.isViewLoaded && (self.view.window != nil)) {
+            SVProgressHUD.show(withStatus: ServerConnectionMessage)
             self.refresh() {
                 SVProgressHUD.dismiss()
-                self.tableView.setContentOffset(CGPointMake(0, -20), animated: true)
+                self.tableView.setContentOffset(CGPoint(x: 0, y: -20), animated: true)
             }
         }
     }
@@ -77,53 +77,52 @@ class EventInfoViewController: BaseTableViewController {
 extension EventInfoViewController: CoachMarksControllerDataSource {
 
     // ヒントを出す数
-    func numberOfCoachMarksForCoachMarksController(coachMarksController: CoachMarksController) -> Int {
+    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
         return 5
     }
 
     // ヒントのマーク配置方法
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarkForIndex index: Int) -> CoachMark {
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
         switch(index) {
         case 0:
-            return coachMarksController.helper.coachMarkForView(self.tableView) { (frame: CGRect) -> UIBezierPath in
-                var cellRect =  self.tableView.rectForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))
-                cellRect = CGRectOffset(cellRect, -self.tableView.contentOffset.x, -self.tableView.contentOffset.y)
-
+            return coachMarksController.helper.makeCoachMark(for: self.tableView) { (frame: CGRect) -> UIBezierPath in
+                var cellRect = self.tableView.rectForRow(at: IndexPath(row: 0, section: 0))
+                cellRect = cellRect.offsetBy(dx: -self.tableView.contentOffset.x, dy: -self.tableView.contentOffset.y)
                 return UIBezierPath(rect: cellRect)
             }
         case 1:
-            return coachMarksController.helper.coachMarkForView(self.tableView) { (frame: CGRect) -> UIBezierPath in
-                let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! EventInfoTableViewCell
-                let cellRect = CGRectOffset(cell.noKeepButton.layer.bounds, cell.noKeepButton.frame.origin.x, cell.noKeepButton.layer.position.y)
+            return coachMarksController.helper.makeCoachMark(for: self.tableView) { (frame: CGRect) -> UIBezierPath in
+                let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! EventInfoTableViewCell
+                let cellRect = cell.noKeepButton.layer.bounds.offsetBy(dx: cell.noKeepButton.frame.origin.x, dy: cell.noKeepButton.layer.position.y)
                 return UIBezierPath(rect: cellRect.insetBy(dx: -5, dy: -5))
             }
 
         case 2:
-            return coachMarksController.helper.coachMarkForView(self.tableView) { (frame: CGRect) -> UIBezierPath in
-                let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! EventInfoTableViewCell
-                let cellRect = CGRectOffset(cell.keepButton.layer.bounds, cell.keepButton.frame.origin.x, cell.keepButton.layer.position.y)
+            return coachMarksController.helper.makeCoachMark(for: self.tableView) { (frame: CGRect) -> UIBezierPath in
+                let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! EventInfoTableViewCell
+                let cellRect = cell.keepButton.layer.bounds.offsetBy(dx: cell.keepButton.frame.origin.x, dy: cell.keepButton.layer.position.y)
                 return UIBezierPath(rect: cellRect.insetBy(dx: -5, dy: -5))
             }
 
         case 3:
-            return coachMarksController.helper.coachMarkForView(self.tabBarController?.tabBar) { (frame: CGRect) -> UIBezierPath in
-                let view = self.tabBarController?.tabBar.items![0].valueForKey("view") as! UIView
-                let cellRect = CGRectOffset(view.layer.bounds,view.frame.origin.x, self.tableView.frame.maxY)
+            return coachMarksController.helper.makeCoachMark(for: self.tabBarController?.tabBar) { (frame: CGRect) -> UIBezierPath in
+                let view = self.tabBarController?.tabBar.items![0].value(forKey: "view") as! UIView
+                let cellRect = view.layer.bounds.offsetBy(dx: view.frame.origin.x, dy: self.tableView.frame.maxY)
                 return UIBezierPath(rect: cellRect)
             }
         case 4:
-            return coachMarksController.helper.coachMarkForView(self.tabBarController?.tabBar) { (frame: CGRect) -> UIBezierPath in
-                let view = self.tabBarController?.tabBar.items![3].valueForKey("view") as! UIView
-                let cellRect = CGRectOffset(view.layer.bounds,view.frame.origin.x, self.tableView.frame.maxY)
+            return coachMarksController.helper.makeCoachMark(for: self.tabBarController?.tabBar) { (frame: CGRect) -> UIBezierPath in
+                let view = self.tabBarController?.tabBar.items![3].value(forKey: "view") as! UIView
+                let cellRect = view.layer.bounds.offsetBy(dx: view.frame.origin.x, dy: self.tableView.frame.maxY)
                 return UIBezierPath(rect: cellRect)
             }
         default:
-            return coachMarksController.helper.coachMarkForView()
+            return coachMarksController.helper.makeCoachMark()
         }
     }
 
     // ヒントに出す内容
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarkViewsForIndex index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
 
         var hintText = ""
 
@@ -141,7 +140,7 @@ extension EventInfoViewController: CoachMarksControllerDataSource {
         default: break
         }
 
-        let coachViews = coachMarksController.helper.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation, hintText: hintText, nextText: nil)
+        let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation, hintText: hintText, nextText: nil)
         
         return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
         

@@ -7,6 +7,7 @@ target 'Eventory' do
 
 # Pods for Eventory
 pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git',:branch => 'master'
+pod 'AlamofireObjectMapper'
 pod 'ObjectMapper', '~> 2.2.0'
 pod 'RealmSwift', '~> 2.1.2'
 pod 'SwiftTask', :git => 'https://github.com/ReactKit/SwiftTask', :branch => 'swift/3.0'
@@ -18,6 +19,7 @@ pod 'Instructions', :git => 'https://github.com/ephread/Instructions',:branch =>
 pod 'BFPaperTabBarController'
 pod 'SwiftyJSON', '~> 3.1.1'
 pod 'iRate'
+pod 'SVWebViewController'
 end
 
 post_install do |installer|

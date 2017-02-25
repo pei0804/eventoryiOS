@@ -31,18 +31,18 @@ let EventInfoCellHeight = CGFloat(250)
 
 enum ApiId: Int {
     
-    case Atdn       = 0
-    case Connpass   = 1
-    case Doorkeeper = 2
-    case None       = 5
+    case atdn       = 0
+    case connpass   = 1
+    case doorkeeper = 2
+    case none       = 5
     
     func getName() -> String {
         
         switch self {
-        case .Atdn:       return "ATDN"
-        case .Connpass:   return "Connpass"
-        case .Doorkeeper: return "Doorkeeper"
-        case .None:       return ""
+        case .atdn:       return "ATDN"
+        case .connpass:   return "Connpass"
+        case .doorkeeper: return "Doorkeeper"
+        case .none:       return ""
         }
     }
 }
@@ -51,28 +51,28 @@ enum ApiId: Int {
 
 enum SettingClass: Int {
     
-    case Genre      = 0
-    case Place      = 1
-    case Status     = 2
-    case None       = 5
+    case genre      = 0
+    case place      = 1
+    case status     = 2
+    case none       = 5
     
     func getUserSettingKey() -> String {
         
         switch self {
-        case .Genre:    return "RegisterGenres"
-        case .Place:    return "RegisterPlaces"
-        case .Status:   return ""
-        case .None:     return ""
+        case .genre:    return "RegisterGenres"
+        case .place:    return "RegisterPlaces"
+        case .status:   return ""
+        case .none:     return ""
         }
     }
     
     func getSettingKey() -> String {
         
         switch self {
-        case .Genre:    return "SettingGenres"
-        case .Place:    return "SettingPlaces"
-        case .Status:   return "SettingStatus"
-        case .None:     return ""
+        case .genre:    return "SettingGenres"
+        case .place:    return "SettingPlaces"
+        case .status:   return "SettingStatus"
+        case .none:     return ""
         }
     }
 }

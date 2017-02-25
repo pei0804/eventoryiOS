@@ -20,7 +20,7 @@ class TerminalPreference: Object {
 }
 
 enum TerminalPreferenceClass: Int {
-    case EventFetch = 0
-    case Tutorial = 1
-    case None = 100
+    case eventFetch = 0
+    case tutorial = 1
+    case none = 100
 }

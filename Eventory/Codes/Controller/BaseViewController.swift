@@ -16,7 +16,7 @@ class BaseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.becomeActive(_:)), name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.becomeActive(_:)), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -29,7 +29,7 @@ class BaseViewController: UIViewController {
         if let scrollView = self.scrollView {
             let refreshControl = UIRefreshControl()
             refreshControl.attributedTitle = NSAttributedString(string: "更新")
-            refreshControl.addTarget(self, action: #selector(BaseViewController.pullRefresh(_:)), forControlEvents: .ValueChanged)
+            refreshControl.addTarget(self, action: #selector(BaseViewController.pullRefresh(_:)), for: .valueChanged)
             if let tableView = scrollView as? UITableView {
                 tableView.backgroundView = refreshControl
             }
@@ -44,24 +44,24 @@ class BaseViewController: UIViewController {
     func handleRefresh() {
     }
 
-    func becomeActive(notification: NSNotification) {
+    func becomeActive(_ notification: Notification) {
     }
 
-    @IBAction func pullRefresh(refreshControl: UIRefreshControl) {
+    @IBAction func pullRefresh(_ refreshControl: UIRefreshControl) {
         self.handleRefresh()
         self.refresh() {
             refreshControl.endRefreshing()
         }
     }
     
-    func refresh(completed: (() -> Void)? = nil) {
-        dispatch_async(dispatch_get_main_queue()) {
+    func refresh(_ completed: (() -> Void)? = nil) {
+        DispatchQueue.main.async {
             completed?()
         }
     }
 
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 }
 
@@ -69,11 +69,11 @@ class BaseViewController: UIViewController {
 
 extension BaseViewController: DZNEmptyDataSetSource {
     
-    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let text = "条件に合致する情報がありません"
         let attribs = [
-            NSFontAttributeName: UIFont.boldSystemFontOfSize(18),
-            NSForegroundColorAttributeName: UIColor.darkGrayColor()
+            NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18),
+            NSForegroundColorAttributeName: UIColor.darkGray
         ]
         
         return NSAttributedString(string: text, attributes: attribs)
@@ -84,19 +84,19 @@ extension BaseViewController: DZNEmptyDataSetSource {
 
 extension BaseViewController: DZNEmptyDataSetDelegate {
     
-    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
         return true
     }
     
-    func emptyDataSetWillAppear(scrollView: UIScrollView!) {
+    func emptyDataSetWillAppear(_ scrollView: UIScrollView!) {
         if let tableView = self.scrollView as? UITableView {
-            tableView.separatorColor = UIColor.clearColor();
+            tableView.separatorColor = UIColor.clear;
         }
     }
     
-    func emptyDataSetDidDisappear(scrollView: UIScrollView!) {
+    func emptyDataSetDidDisappear(_ scrollView: UIScrollView!) {
         if let tableView = self.scrollView as? UITableView {
-            tableView.separatorColor = UIColor.grayColor();
+            tableView.separatorColor = UIColor.gray;
         }
     }
 }
