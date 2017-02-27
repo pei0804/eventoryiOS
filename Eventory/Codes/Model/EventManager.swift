@@ -34,10 +34,10 @@ class EventManager {
         var firstFlg: Bool = false
         for genre in genres {
             if !firstFlg {
-                selectGenre += "AND (title CONTAINS[c] '\(genre)' "
+                selectGenre += "AND (title CONTAINS[c] '\(genre.realmEscaped)' "
                 firstFlg = true
             }
-            selectGenre += "OR title CONTAINS[c] '\(genre)' "
+            selectGenre += "OR title CONTAINS[c] '\(genre.realmEscaped)' "
         }
         // 0は許容していないがバグ回避のためチェック
         if genres.count != 0 {
@@ -47,17 +47,17 @@ class EventManager {
         firstFlg = false
         for place in places {
             if !firstFlg {
-                selectGenre += "AND (address CONTAINS[c] '\(place)' OR  place CONTAINS[c] '\(place)'"
+                selectGenre += "AND (address CONTAINS[c] '\(place.realmEscaped)' OR  place CONTAINS[c] '\(place.realmEscaped)'"
                 firstFlg = true
             }
-            selectGenre += "OR address CONTAINS[c] '\(place)' OR place CONTAINS[c] '\(place)' "
+            selectGenre += "OR address CONTAINS[c] '\(place.realmEscaped)' OR place CONTAINS[c] '\(place.realmEscaped)' "
         }
         // 0は許容していないがバグ回避のためチェック
         if places.count != 0 {
             selectGenre += ")"
         }
 
-        let events: Results<Event> = self.realm.objects(Event.self).filter("checkStatus == \(CheckStatus.noCheck.rawValue) \(selectGenre)").sorted(byProperty: "startAt")
+        let events: Results<Event> = self.realm.objects(Event.self).filter("checkStatus == \(CheckStatus.noCheck.rawValue) \(selectGenre.realmEscaped)").sorted(byProperty: "startAt")
         return setEventInfo(events)
     }
 
@@ -168,7 +168,23 @@ class EventManager {
                 self.realm.beginWrite()
                 for (_, subJson) : (String, JSON) in json {
                     let event: Event = Mapper<Event>().map(JSONObject: subJson.dictionaryObject!)!
-                    self.realm.add(event, update: true)
+                    self.realm.create(Event.self,
+                                      value:[
+                                        "id":event.id,
+                                        "eventId"   : event.eventId,
+                                        "apiId"     : event.apiId,
+                                        "title"     : event.title,
+                                        //"desc" : event.desc,
+                                        "url"       : event.url,
+                                        "limit"     : event.limit,
+                                        "accepted"  : event.accepted,
+                                        //"waitlisted" : event.waitlisted,
+                                        "address"   : event.address,
+                                        "place"     : event.place,
+                                        "startAt"   : event.startAt,
+                                        "endAt"     : event.endAt
+                        ],
+                                      update: true)
                 }
 
                 do {
@@ -433,5 +449,19 @@ class EventManager {
             ]
         ]
         return place
+    }
+}
+
+public extension String {
+    public var realmEscaped: String {
+        let reps = [
+            "\\" : "\\\\",
+            "'"  : "\\'",
+            ]
+        var ret = self
+        for rep in reps {
+            ret = self.replacingOccurrences(of: rep.0, with: rep.1)
+        }
+        return ret
     }
 }
