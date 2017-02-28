@@ -140,14 +140,8 @@ extension EventInfoViewController: CoachMarksControllerDataSource {
             hintText = "興味設定はこちらから変更できます。"
         default: break
         }
-
-<<<<<<< HEAD
         let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation, hintText: hintText, nextText: nil)
         
-=======
-        let coachViews = coachMarksController.helper.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation, hintText: hintText, nextText: nil)
-
->>>>>>> swift3.0
         return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
         
     }
