@@ -20,11 +20,11 @@
 		6C4E1F171D7D39BB00A2BE13 /* CheckListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C4E1F161D7D39BB00A2BE13 /* CheckListTableViewCell.xib */; };
 		6C4E1F191D7D3A8600A2BE13 /* RegisterGenreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4E1F181D7D3A8600A2BE13 /* RegisterGenreViewController.swift */; };
 		6C4E1F1B1D7D3AAE00A2BE13 /* RegisterPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4E1F1A1D7D3AAE00A2BE13 /* RegisterPlaceViewController.swift */; };
-		6C6A26FF1D8E571D00F479CA /* AllEventSerachViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6A26FE1D8E571D00F479CA /* AllEventSerachViewController.swift */; };
 		6C6A27011D8E614D00F479CA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6A27001D8E614D00F479CA /* BaseViewController.swift */; };
 		6C88DF471E165BA000203C85 /* KeepButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C88DF461E165BA000203C85 /* KeepButton.swift */; };
 		6C8FC9D61E34D1BD00A88A0A /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C8FC9D51E34D1BD00A88A0A /* BaseTableViewController.swift */; };
 		6C93CBF51E58AC80003C688B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C93CBF41E58AC80003C688B /* Images.xcassets */; };
+		6CA8B2DC1E61BAAF00B462B1 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA8B2DB1E61BAAF00B462B1 /* DateFormatter.swift */; };
 		6CA92BEE1E3B0DA300F0823F /* APISetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA92BED1E3B0DA300F0823F /* APISetting.swift */; };
 		6CA95B0D1D6729BF00983152 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA95B0C1D6729BF00983152 /* AppDelegate.swift */; };
 		6CA95B121D6729BF00983152 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CA95B101D6729BF00983152 /* Main.storyboard */; };
@@ -64,11 +64,11 @@
 		6C4E1F181D7D3A8600A2BE13 /* RegisterGenreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterGenreViewController.swift; sourceTree = "<group>"; };
 		6C4E1F1A1D7D3AAE00A2BE13 /* RegisterPlaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterPlaceViewController.swift; sourceTree = "<group>"; };
 		6C5E463F1D92231F00AC9EC9 /* Eventory-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Eventory-Bridging-Header.h"; sourceTree = "<group>"; };
-		6C6A26FE1D8E571D00F479CA /* AllEventSerachViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllEventSerachViewController.swift; sourceTree = "<group>"; };
 		6C6A27001D8E614D00F479CA /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		6C88DF461E165BA000203C85 /* KeepButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeepButton.swift; sourceTree = "<group>"; };
 		6C8FC9D51E34D1BD00A88A0A /* BaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		6C93CBF41E58AC80003C688B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		6CA8B2DB1E61BAAF00B462B1 /* DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		6CA92BED1E3B0DA300F0823F /* APISetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APISetting.swift; sourceTree = "<group>"; };
 		6CA95B091D6729BF00983152 /* Eventory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Eventory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CA95B0C1D6729BF00983152 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -186,7 +186,6 @@
 		6CA95B231D672CDD00983152 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				6C6A26FE1D8E571D00F479CA /* AllEventSerachViewController.swift */,
 				6C1DB0071D8FC1F300044A41 /* BaseNavigationViewController.swift */,
 				6C8FC9D51E34D1BD00A88A0A /* BaseTableViewController.swift */,
 				6C6A27001D8E614D00F479CA /* BaseViewController.swift */,
@@ -222,6 +221,7 @@
 				6CA95B0C1D6729BF00983152 /* AppDelegate.swift */,
 				6C5E463F1D92231F00AC9EC9 /* Eventory-Bridging-Header.h */,
 				6CA95B1F1D672B9700983152 /* SwiftyJSON.swift */,
+				6CA8B2DB1E61BAAF00B462B1 /* DateFormatter.swift */,
 			);
 			path = Etc;
 			sourceTree = "<group>";
@@ -303,6 +303,7 @@
 					6CA95B081D6729BF00983152 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 3VM353B4CF;
+						LastSwiftMigration = 0820;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -418,12 +419,12 @@
 				6C4E1F191D7D3A8600A2BE13 /* RegisterGenreViewController.swift in Sources */,
 				6CA95B2F1D67306C00983152 /* EventInfoViewController.swift in Sources */,
 				6CA95B2D1D67303400983152 /* EventInfoTableViewCell.swift in Sources */,
-				6C6A26FF1D8E571D00F479CA /* AllEventSerachViewController.swift in Sources */,
 				6C1DAFFA1D8FB7C800044A41 /* Color.swift in Sources */,
 				6CA95B0D1D6729BF00983152 /* AppDelegate.swift in Sources */,
 				6CA95B201D672B9700983152 /* Event.swift in Sources */,
 				6C8FC9D61E34D1BD00A88A0A /* BaseTableViewController.swift in Sources */,
 				6C3026D31D698E7C00D73A90 /* ViewFormatter.swift in Sources */,
+				6CA8B2DC1E61BAAF00B462B1 /* DateFormatter.swift in Sources */,
 				6CFD6C361D854B7F00B6C37F /* PushNotificationManager.swift in Sources */,
 				6C88DF471E165BA000203C85 /* KeepButton.swift in Sources */,
 				6CB258D21E418920006C6CBC /* EventPageWebViewController.swift in Sources */,
@@ -507,7 +508,7 @@
 				OTHER_SWIFT_FLAGS = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = "";
 			};
 			name = Debug;
 		};
@@ -551,7 +552,7 @@
 				OTHER_SWIFT_FLAGS = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -570,13 +571,13 @@
 				INFOPLIST_FILE = Eventory/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_SWIFT_FLAGS = "";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = xyz.ganbaruman.Eventory;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Eventory/Etc/Eventory-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -594,13 +595,13 @@
 				INFOPLIST_FILE = Eventory/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_SWIFT_FLAGS = "";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = xyz.ganbaruman.Eventory;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Eventory/Etc/Eventory-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

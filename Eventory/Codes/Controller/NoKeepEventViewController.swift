@@ -13,15 +13,15 @@ import SwiftTask
 class NoKeepEventViewController: BaseTableViewController {
 
     override var viewPageClass: CheckStatus {
-        return CheckStatus.NoKeep
+        return CheckStatus.noKeep
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
-    override func viewWillAppear(animated: Bool) {
-        SVProgressHUD.showWithStatus(ServerConnectionMessage)
+    override func viewWillAppear(_ animated: Bool) {
+        SVProgressHUD.show(withStatus: ServerConnectionMessage)
         self.handleRefresh()
         self.refresh() {
             SVProgressHUD.dismiss()
@@ -32,7 +32,7 @@ class NoKeepEventViewController: BaseTableViewController {
         super.didReceiveMemoryWarning()
     }
 
-    override func refresh(completed: (() -> Void)? = nil) {
+    override func refresh(_ completed: (() -> Void)? = nil) {
         self.eventSummaries = EventManager.sharedInstance.getNoKeepEventAll()
         completed?()
     }

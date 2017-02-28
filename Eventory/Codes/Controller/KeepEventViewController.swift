@@ -13,15 +13,15 @@ import SwiftTask
 class KeepEventViewController: BaseTableViewController {
 
     override var viewPageClass: CheckStatus {
-        return CheckStatus.Keep
+        return CheckStatus.keep
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
-    override func viewWillAppear(animated: Bool) {
-        SVProgressHUD.showWithStatus(ServerConnectionMessage)
+    override func viewWillAppear(_ animated: Bool) {
+        SVProgressHUD.show(withStatus: ServerConnectionMessage)
         self.handleRefresh()
         self.refresh() {
             SVProgressHUD.dismiss()
@@ -32,7 +32,7 @@ class KeepEventViewController: BaseTableViewController {
         super.didReceiveMemoryWarning()
     }
 
-    override func refresh(completed: (() -> Void)? = nil) {
+    override func refresh(_ completed: (() -> Void)? = nil) {
         self.eventSummaries = EventManager.sharedInstance.getKeepEventAll()
         completed?()
     }

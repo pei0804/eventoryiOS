@@ -14,8 +14,8 @@ class PushNotificationManager {
     static let sharedInstance = PushNotificationManager()
     
     var enabled: Bool {
-        if let currentSettings = UIApplication.sharedApplication().currentUserNotificationSettings() {
-            if currentSettings.types != .None {
+        if let currentSettings = UIApplication.shared.currentUserNotificationSettings {
+            if currentSettings.types != UIUserNotificationType() {
                 return true
             }
         }
@@ -24,9 +24,9 @@ class PushNotificationManager {
     
     // TODO:　プッシュ通知の実装
     func registerRemote() {
-        let application = UIApplication.sharedApplication()
+        let application = UIApplication.shared
         let notificationSettings = UIUserNotificationSettings(
-            forTypes: [.Badge, .Sound, .Alert], categories: nil)
+            types: [.badge, .sound, .alert], categories: nil)
         application.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
         application.registerUserNotificationSettings(notificationSettings)
         application.registerForRemoteNotifications()

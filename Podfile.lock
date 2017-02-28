@@ -1,18 +1,21 @@
 PODS:
-  - Alamofire (3.5.1)
+  - Alamofire (4.3.0)
+  - AlamofireObjectMapper (4.1.0):
+    - Alamofire (~> 4.1)
+    - ObjectMapper (~> 2.0)
   - BFPaperTabBarController (2.2.6)
   - DZNEmptyDataSet (1.8.1)
-  - Firebase/Core (3.13.0):
+  - Firebase/Core (3.14.0):
     - FirebaseAnalytics (= 3.7.0)
-    - FirebaseCore (= 3.5.0)
-  - Firebase/Messaging (3.13.0):
+    - FirebaseCore (= 3.5.1)
+  - Firebase/Messaging (3.14.0):
     - Firebase/Core
     - FirebaseMessaging (= 1.2.2)
   - FirebaseAnalytics (3.7.0):
     - FirebaseCore (~> 3.5)
     - FirebaseInstanceID (~> 1.0)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseCore (3.5.0):
+  - FirebaseCore (3.5.1):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
   - FirebaseInstanceID (1.0.9)
   - FirebaseMessaging (1.2.2):
@@ -29,7 +32,7 @@ PODS:
     - Instructions/Core (= 0.5.0)
   - Instructions/Core (0.5.0)
   - iRate (1.11.7)
-  - ObjectMapper (0.19)
+  - ObjectMapper (2.2.3)
   - Protobuf (3.2.0)
   - Realm (2.1.2):
     - Realm/Headers (= 2.1.2)
@@ -37,40 +40,70 @@ PODS:
   - RealmSwift (2.1.2):
     - Realm (= 2.1.2)
   - SVProgressHUD (2.1.2)
+  - SVWebViewController (1.0)
   - SwiftTask (5.0.0)
+  - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
-  - Alamofire (~> 3.0)
+  - Alamofire (from `https://github.com/Alamofire/Alamofire.git`, branch `master`)
+  - AlamofireObjectMapper
   - BFPaperTabBarController
   - DZNEmptyDataSet (~> 1.8.1)
   - Firebase/Core
   - Firebase/Messaging
-  - Instructions (~> 0.5)
+  - Instructions (from `https://github.com/ephread/Instructions`, branch `master`)
   - iRate
-  - ObjectMapper (~> 0.17)
+  - ObjectMapper (~> 2.2.0)
   - RealmSwift (~> 2.1.2)
   - SVProgressHUD (~> 2.1.2)
-  - SwiftTask (~> 5.0.0)
+  - SVWebViewController
+  - SwiftTask (from `https://github.com/ReactKit/SwiftTask`, branch `swift/3.0`)
+  - SwiftyJSON (~> 3.1.1)
+
+EXTERNAL SOURCES:
+  Alamofire:
+    :branch: master
+    :git: https://github.com/Alamofire/Alamofire.git
+  Instructions:
+    :branch: master
+    :git: https://github.com/ephread/Instructions
+  SwiftTask:
+    :branch: swift/3.0
+    :git: https://github.com/ReactKit/SwiftTask
+
+CHECKOUT OPTIONS:
+  Alamofire:
+    :commit: fa3c6d09b603f417c7788adb51ca0cade75b3d67
+    :git: https://github.com/Alamofire/Alamofire.git
+  Instructions:
+    :commit: e8b448d108908d9bb47f5d1b00f57fcc0d77e6f3
+    :git: https://github.com/ephread/Instructions
+  SwiftTask:
+    :commit: 98f89883509d27229d60ff3f2ececdd82a46d674
+    :git: https://github.com/ReactKit/SwiftTask
 
 SPEC CHECKSUMS:
-  Alamofire: 0dfba1184a543e2aa160f4e39cac4e8aba48d223
+  Alamofire: 1f72088aff8f6b40828dadd61be2e9a31beca01e
+  AlamofireObjectMapper: 435adc82f5b367679bd9e71c4974a54efd0b2521
   BFPaperTabBarController: b8e844b72c7063adbf498b92a09a5ba49249877a
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
-  Firebase: 5bc34d7b5ff5792e3386c8b28dc6265deeab0da4
+  Firebase: 85a581fb04e44f63ae9f4fbc8d6dabf4a4c18653
   FirebaseAnalytics: 0d1b7d81d5021155be37702a94ba1ec16d45365d
-  FirebaseCore: 1c0a13bf59bb95cdd19577252499f0ec6a03e999
+  FirebaseCore: 225d40532489835a034b8f4e2c9c87fbf4f615a2
   FirebaseInstanceID: 2d0518b1378fe9d685ef40cbdd63d2fdc1125339
   FirebaseMessaging: df8267f378580a24174ce7861233aa11d5c90109
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   Instructions: 6976f674ce788aefec475be6f18500572f1645d4
   iRate: adae3f183d83c925ac42d7a2e86e89e838963f57
-  ObjectMapper: a88114e5df20f055da63029f25cbc01014847c91
+  ObjectMapper: d3b3de11267f5d971f390eb8d63dd509116a4329
   Protobuf: 745f59e122e5de98d4d7ef291e264a0eef80f58e
   Realm: efe855f4d977c8ce5a82d3116d9f1ff155a6550c
   RealmSwift: 17d6ee30b6f9df86364408c2197492e33bfea567
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
+  SVWebViewController: c36dda7326e81fcae0abf5d02bf7bbf7e41be901
   SwiftTask: 7fcd92f8ac16876e82c0e4ced0cea7e028456b6b
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: cad234239d8755b8f747e075d5788eca2292e1b4
+PODFILE CHECKSUM: ceea2074fb25bd7e89de41c766891ba5688cd6b3
 
 COCOAPODS: 1.0.1

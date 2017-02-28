@@ -6,16 +6,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Eventory/Codes/Controller/EventInfoViewController.swift"
-            timestampString = "509134084.131097"
+            filePath = "Eventory/Codes/Controller/RegisterPlaceViewController.swift"
+            timestampString = "509769652.278918"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
-            landmarkName = "coachMarksController(coachMarksController:coachMarkForIndex:)"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "pushSubmitBtn(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

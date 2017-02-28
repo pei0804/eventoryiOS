@@ -27,18 +27,18 @@ class EventPageWebViewController: UIViewController, WKNavigationDelegate {
 
         let width: CGFloat! = self.view.bounds.width
         let height: CGFloat! = self.view.bounds.height
-        let statusBarHeight: CGFloat! = UIApplication.sharedApplication().statusBarFrame.height
+        let statusBarHeight: CGFloat! = UIApplication.shared.statusBarFrame.height
 
         self.navigationBar.topItem?.title = navigationTitle
-        self.webView = self.createWebView(CGRectMake(0, statusBarHeight+44, width, height - statusBarHeight))
+        self.webView = self.createWebView(CGRect(x: 0, y: statusBarHeight+44, width: width, height: height - statusBarHeight))
         self.webView.navigationDelegate = self
         self.view.addSubview(self.webView)
-        self.view.sendSubviewToBack(self.webView)
+        self.view.sendSubview(toBack: self.webView)
 
-        let url: NSURL = NSURL(string: targetURL)!
-        let request: NSURLRequest = NSURLRequest(URL: url)
-        self.webView.loadRequest(request)
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        let url: URL = URL(string: targetURL)!
+        let request: URLRequest = URLRequest(url: url)
+        self.webView.load(request)
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
 
     }
 
@@ -46,46 +46,46 @@ class EventPageWebViewController: UIViewController, WKNavigationDelegate {
         super.didReceiveMemoryWarning()
     }
 
-    func webViewDidStartLoad(webView: UIWebView) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-        self.rewindButton.enabled = self.webView!.canGoBack
-        self.fastForwardButton.enabled = self.webView!.canGoForward
-        self.refreshButton.enabled = true
-        self.openInSafari.enabled = true
+    func webViewDidStartLoad(_ webView: UIWebView) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        self.rewindButton.isEnabled = self.webView!.canGoBack
+        self.fastForwardButton.isEnabled = self.webView!.canGoForward
+        self.refreshButton.isEnabled = true
+        self.openInSafari.isEnabled = true
     }
 
-    func webViewDidFinishLoad(webView: UIWebView) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-        self.rewindButton.enabled = self.webView!.canGoBack
-        self.fastForwardButton.enabled = self.webView!.canGoForward
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        self.rewindButton.isEnabled = self.webView!.canGoBack
+        self.fastForwardButton.isEnabled = self.webView!.canGoForward
     }
 
-    func createWebView(frame: CGRect) -> WKWebView {
+    func createWebView(_ frame: CGRect) -> WKWebView {
         let webView = WKWebView()
         webView.frame = frame
         return webView
     }
 
-    @IBAction func WebViewCancel(_: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func WebViewCancel(_: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
 
-    @IBAction func back(_: AnyObject) {
-        self.webView?.goBack()
+    @IBAction func back(_: Any) {
+        _ = self.webView?.goBack()
     }
 
-    @IBAction func forward(_: AnyObject) {
-        self.webView?.goForward()
+    @IBAction func forward(_: Any) {
+        _ = self.webView?.goForward()
     }
 
-    @IBAction func refresh(_: AnyObject) {
-        self.webView?.reload()
+    @IBAction func refresh(_: Any) {
+        _ = self.webView?.reload()
     }
 
-    @IBAction func safari(_: AnyObject) {
-        let url = self.webView.URL
-        if UIApplication.sharedApplication().canOpenURL(url!){
-            UIApplication.sharedApplication().openURL(url!)
+    @IBAction func safari(_: Any) {
+        let url = self.webView.url
+        if UIApplication.shared.canOpenURL(url!){
+            UIApplication.shared.openURL(url!)
         }
     }
 }

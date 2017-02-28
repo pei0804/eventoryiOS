@@ -14,9 +14,9 @@ class RegisterPlaceViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     var checkCount: Int = 0
-    var places = [Dictionary<String, AnyObject>]?() {
+    var places: [Dictionary<String, Any>]? {
         didSet {
-            tableView.reloadData()
+            self.tableView.reloadData()
         }
     }
 
@@ -33,28 +33,28 @@ class RegisterPlaceViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
 
-        self.tableView.registerNib(UINib(nibName: CheckListTableViewCellIdentifier, bundle: nil), forCellReuseIdentifier: CheckListTableViewCellIdentifier)
+        self.tableView.register(UINib(nibName: CheckListTableViewCellIdentifier, bundle: nil), forCellReuseIdentifier: CheckListTableViewCellIdentifier)
     }
 
-    override func viewWillAppear(animated:Bool) {
+    override func viewWillAppear(_ animated:Bool) {
         super.viewWillAppear(animated)
         if self.settingStatus {
-            self.leftBarButton = UIBarButtonItem(title: "戻る", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(self.goBack(_:)))
-            self.rightBarButton = UIBarButtonItem(title: "適用", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(self.pushSubmitBtn(_:)))
+            self.leftBarButton = UIBarButtonItem(title: "戻る", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.goBack(_:)))
+            self.rightBarButton = UIBarButtonItem(title: "適用", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.pushSubmitBtn(_:)))
             self.places = UserRegister.sharedInstance.getSettingPlaces()
             self.checkCount = UserRegister.sharedInstance.getUserSettingPlaces().count
             TerminalPreferenceManager.sharedInstance.resetUpdateTime()
         } else {
             //            self.leftBarButton = UIBarButtonItem(title: "戻る", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(self.goBack(_:)))
-            self.rightBarButton = UIBarButtonItem(title: "次へ", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(self.pushSubmitBtn(_:)))
+            self.rightBarButton = UIBarButtonItem(title: "次へ", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.pushSubmitBtn(_:)))
             self.places = EventManager.sharedInstance.placesInitializer()
-            UserRegister.sharedInstance.setUserSettingRegister(EventManager.sharedInstance.genreInitializer(), settingClass: SettingClass.Genre)
+            UserRegister.sharedInstance.setUserSettingRegister(EventManager.sharedInstance.genreInitializer(), settingClass: SettingClass.genre)
         }
         self.navigationItem.leftBarButtonItem = self.leftBarButton
         self.navigationItem.rightBarButtonItem = self.rightBarButton
     }
 
-    override func viewWillDisappear(animated:Bool) {
+    override func viewWillDisappear(_ animated:Bool) {
         super.viewWillDisappear(animated)
     }
 
@@ -62,12 +62,11 @@ class RegisterPlaceViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
 
-    @IBAction func goBack(sender: AnyObject) {
-        self.navigationController?.popToRootViewControllerAnimated(true)
-
+    @IBAction func goBack(_ sender: Any) {
+        _ = self.navigationController?.popViewController(animated:true)
     }
 
-    //    @IBAction func pushEditModeBtn(sender: AnyObject) {
+    //    @IBAction func pushEditModeBtn(sender: Any) {
     //        if self.tableView.editing == false {
     //            self.tableView.editing = true
     //        } else {
@@ -75,36 +74,36 @@ class RegisterPlaceViewController: UIViewController {
     //        }
     //    }
 
-    @IBAction func pushSubmitBtn(sender: AnyObject) {
-        UserRegister.sharedInstance.setUserSettingRegister(self.places, settingClass: SettingClass.Place)
+    @IBAction func pushSubmitBtn(_ sender: Any) {
+        UserRegister.sharedInstance.setUserSettingRegister(self.places, settingClass: SettingClass.place)
         UserRegister.sharedInstance.setDefaultSettingStatus(true)
         if self.settingStatus {
-            dispatch_async(dispatch_get_main_queue()) {
-                SVProgressHUD.showWithStatus(ServerConnectionMessage)
+            DispatchQueue.main.async {
+                SVProgressHUD.show(withStatus: ServerConnectionMessage)
                 let task = [EventManager.sharedInstance.fetchNewEvent()]
                 Task.all(task).success { _ in
                     SVProgressHUD.dismiss()
-                    self.navigationController?.popToRootViewControllerAnimated(true)
+                    _ = self.navigationController?.popViewController(animated:true)
                     }.failure { _ in
                         SVProgressHUD.dismiss()
-                        self.navigationController?.popToRootViewControllerAnimated(true)
+                        _ = self.navigationController?.popViewController(animated:true)
                 }
             }
         } else {
-            dispatch_async(dispatch_get_main_queue()) {
-                SVProgressHUD.showWithStatus("サービス利用準備中\n初回通信は時間がかかります。")
+            DispatchQueue.main.async {
+                SVProgressHUD.show(withStatus: "サービス利用準備中\n初回通信は時間がかかります。")
                 let task = [EventManager.sharedInstance.fetchNewEvent()]
                 Task.all(task).success { _ in
                     SVProgressHUD.dismiss()
                     let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-                    let vc: UITabBarController = storyBoard.instantiateViewControllerWithIdentifier("MainMenu") as! UITabBarController
-                    self.presentViewController(vc, animated: true, completion: nil)
+                    let vc: UITabBarController = storyBoard.instantiateViewController(withIdentifier: "MainMenu") as! UITabBarController
+                    self.present(vc, animated: true, completion: nil)
                     }.failure { _ in
                         SVProgressHUD.dismiss()
-                        let alert: UIAlertController = UIAlertController(title: NetworkErrorTitle,message: NetworkErrorMessage, preferredStyle: .Alert)
-                        let cancelAction: UIAlertAction = UIAlertAction(title: NetworkErrorButton, style: .Cancel, handler: nil)
+                        let alert: UIAlertController = UIAlertController(title: NetworkErrorTitle,message: NetworkErrorMessage, preferredStyle: .alert)
+                        let cancelAction: UIAlertAction = UIAlertAction(title: NetworkErrorButton, style: .cancel, handler: nil)
                         alert.addAction(cancelAction)
-                        self.presentViewController(alert, animated: true, completion: nil)
+                        self.present(alert, animated: true, completion: nil)
                 }
             }
         }
@@ -116,19 +115,19 @@ class RegisterPlaceViewController: UIViewController {
 
 extension RegisterPlaceViewController: UITableViewDataSource {
 
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let places = self.places {
             return places.count
         }
         return 0
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if let cell = self.tableView.dequeueReusableCellWithIdentifier(CheckListTableViewCellIdentifier, forIndexPath: indexPath) as? CheckListTableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = self.tableView.dequeueReusableCell(withIdentifier: CheckListTableViewCellIdentifier, for: indexPath) as? CheckListTableViewCell {
             if let places = self.places {
                 cell.bind(places[indexPath.row])
                 return cell
@@ -148,11 +147,11 @@ extension RegisterPlaceViewController: UITableViewDataSource {
 
 extension RegisterPlaceViewController: UITableViewDelegate {
 
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if let cell = self.tableView.cellForRowAtIndexPath(indexPath) as? CheckListTableViewCell {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cell = self.tableView.cellForRow(at: indexPath) as? CheckListTableViewCell {
             cell.checkAction(&self.places, indexPath: indexPath, checkCount: &self.checkCount)
         }
-        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        self.tableView.deselectRow(at: indexPath, animated: true)
     }
 
 

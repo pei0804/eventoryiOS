@@ -12,12 +12,12 @@ import SafariServices
 import SVProgressHUD
 import SwiftTask
 
-class BaseTableViewController: UITableViewController {
+internal class BaseTableViewController: UITableViewController {
 
     @IBOutlet weak var scrollView: UIScrollView?
     
     var viewPageClass: CheckStatus {
-        return CheckStatus.None
+        return CheckStatus.none
     }
 
     // TODO いつか変える
@@ -25,8 +25,8 @@ class BaseTableViewController: UITableViewController {
 
     var eventSummaries: [EventSummary]? {
         didSet {
-            if let eventSummaries = self.eventSummaries where eventSummaries.count == 0 {
-                self.tableView.setContentOffset(CGPointZero, animated: false)
+            if let eventSummaries = self.eventSummaries, eventSummaries.count == 0 {
+                self.tableView.setContentOffset(CGPoint.zero, animated: false)
             }
             self.tableView.reloadData()
         }
@@ -41,15 +41,15 @@ class BaseTableViewController: UITableViewController {
         self.tableView.emptyDataSetSource = self
         self.tableView.emptyDataSetDelegate = self
 
-        self.edgesForExtendedLayout = UIRectEdge.None
+        self.edgesForExtendedLayout = UIRectEdge()
 
         self.tableView.tableFooterView = UIView()
         self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0)
         self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(20, 0, 0, 0)
 
-        self.tableView.registerNib(UINib(nibName: EventInfoTableViewCellIdentifier, bundle: nil), forCellReuseIdentifier: EventInfoTableViewCellIdentifier)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.viewWillEnterForeground(_:)), name: UIApplicationWillEnterForegroundNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.viewDidEnterBackground(_:)), name: UIApplicationDidEnterBackgroundNotification, object: nil)
+        self.tableView.register(UINib(nibName: EventInfoTableViewCellIdentifier, bundle: nil), forCellReuseIdentifier: EventInfoTableViewCellIdentifier)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.viewWillEnterForeground(_:)), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.viewDidEnterBackground(_:)), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -59,7 +59,7 @@ class BaseTableViewController: UITableViewController {
 
     deinit {
         self.tableView.delegate = nil
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 
     var refreshControlY: CGFloat = 3.0
@@ -68,7 +68,7 @@ class BaseTableViewController: UITableViewController {
         if let scrollView = self.scrollView {
             let refreshControl = UIRefreshControl()
             refreshControl.attributedTitle = NSAttributedString(string: "更新")
-            refreshControl.addTarget(self, action: #selector(BaseViewController.pullRefresh(_:)), forControlEvents: .ValueChanged)
+            refreshControl.addTarget(self, action: #selector(BaseViewController.pullRefresh(_:)), for: .valueChanged)
             if let tableView = scrollView as? UITableView {
                 tableView.backgroundView = refreshControl
                 tableView.alwaysBounceVertical = true
@@ -83,15 +83,15 @@ class BaseTableViewController: UITableViewController {
     func handleRefresh() {
     }
 
-    func viewWillEnterForeground(notification: NSNotification?) {
-        UIApplication.sharedApplication().applicationIconBadgeNumber = -1
+    func viewWillEnterForeground(_ notification: Notification?) {
+        UIApplication.shared.applicationIconBadgeNumber = -1
     }
 
-    func viewDidEnterBackground(notification: NSNotification?) {
+    func viewDidEnterBackground(_ notification: Notification?) {
     }
 
-    @IBAction func pullRefresh(refreshControl: UIRefreshControl) {
-        SVProgressHUD.showWithStatus(ServerConnectionMessage)
+    @IBAction func pullRefresh(_ refreshControl: UIRefreshControl) {
+        SVProgressHUD.show(withStatus: ServerConnectionMessage)
         self.handleRefresh()
         self.refresh() {
             SVProgressHUD.dismiss()
@@ -99,34 +99,32 @@ class BaseTableViewController: UITableViewController {
         }
     }
 
-    func refresh(completed: (() -> Void)? = nil) {
-        dispatch_async(dispatch_get_main_queue()) {
+    func refresh(_ completed: (() -> Void)? = nil) {
+        DispatchQueue.main.async {
             let task = [EventManager.sharedInstance.fetchNewEvent()]
             Task.all(task).success { _ in
                 self.eventSummaries = self.getEventInfo(self.viewPageClass)
                 completed?()
                 }.failure { _ in
-                    let alert: UIAlertController = UIAlertController(title: NetworkErrorTitle,message: NetworkErrorMessage, preferredStyle: .Alert)
-                    let cancelAction: UIAlertAction = UIAlertAction(title: NetworkErrorButton, style: .Cancel, handler: nil)
+                    let alert: UIAlertController = UIAlertController(title: NetworkErrorTitle,message: NetworkErrorMessage, preferredStyle: .alert)
+                    let cancelAction: UIAlertAction = UIAlertAction(title: NetworkErrorButton, style: .cancel, handler: nil)
                     alert.addAction(cancelAction)
-                    self.presentViewController(alert, animated: true, completion: nil)
+                    self.present(alert, animated: true, completion: nil)
                     self.eventSummaries = self.getEventInfo(self.viewPageClass)
                     completed?()
             }
         }
     }
 
-    func getEventInfo(viewPageClass: CheckStatus) -> [EventSummary]? {
+    func getEventInfo(_ viewPageClass: CheckStatus) -> [EventSummary]? {
         switch viewPageClass {
-        case .NoCheck:
+        case .noCheck:
             return EventManager.sharedInstance.getSelectNewEventAll()
-        case .Keep:
+        case .keep:
             return EventManager.sharedInstance.getKeepEventAll()
-        case .Search:
-            return EventManager.sharedInstance.getNewEventAll("")
-        case .NoKeep:
+        case .noKeep:
             return EventManager.sharedInstance.getNoKeepEventAll()
-        case .None:
+        case .none:
             return eventSummaries
         }
     }
@@ -135,23 +133,23 @@ class BaseTableViewController: UITableViewController {
 // MARK: - UITableViewDataSource
 extension BaseTableViewController {
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let eventSummaries = self.eventSummaries {
             return eventSummaries.count
         }
         return 0
     }
 
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return EventInfoCellHeight
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if let cell = self.tableView.dequeueReusableCellWithIdentifier(EventInfoTableViewCellIdentifier, forIndexPath: indexPath) as? EventInfoTableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = self.tableView.dequeueReusableCell(withIdentifier: EventInfoTableViewCellIdentifier, for: indexPath) as? EventInfoTableViewCell {
             if let eventSummaries = self.eventSummaries {
                 cell.bind(eventSummaries[indexPath.row], indexPath: indexPath)
                 return cell
@@ -165,33 +163,31 @@ extension BaseTableViewController {
 // MARK: - UITableViewDelegate
 extension BaseTableViewController: SFSafariViewControllerDelegate, UIWebViewDelegate {
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath:NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath:IndexPath) {
 
         guard let eventSummaries = self.eventSummaries else {
             return
         }
         let url: String = eventSummaries[indexPath.row].url
-        if !url.lowercaseString.hasPrefix("http://") && !url.lowercaseString.hasPrefix("https://") {
-            let alert: UIAlertController = UIAlertController(title: "不正なリンクを検出しました", message: "このイベントに設定されているリンクに問題がありました。", preferredStyle: .Alert)
-            let cancelAction: UIAlertAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+        if !url.lowercased().hasPrefix("http://") && !url.lowercased().hasPrefix("https://") {
+            let alert: UIAlertController = UIAlertController(title: "不正なリンクを検出しました", message: "このイベントに設定されているリンクに問題がありました。", preferredStyle: .alert)
+            let cancelAction: UIAlertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
             alert.addAction(cancelAction)
-            self.presentViewController(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
             return
         }
         if #available(iOS 9.0, *) {
-            let brow = SFSafariViewController(URL: NSURL(string: url)!, entersReaderIfAvailable: false)
+            let brow = SFSafariViewController(url: URL(string: url)!, entersReaderIfAvailable: false)
             brow.delegate = self
-            // TODO いつか変える
             self.sawWebView = true
-            presentViewController(brow, animated: true, completion: nil)
+            present(brow, animated: true, completion: nil)
         } else {
-            let vc = UIStoryboard(name:"Main", bundle: nil).instantiateViewControllerWithIdentifier(EventPageWebViewControllerIdentifier) as! EventPageWebViewController
+            let vc = UIStoryboard(name:"Main", bundle: nil).instantiateViewController(withIdentifier: EventPageWebViewControllerIdentifier) as! EventPageWebViewController
             vc.targetURL = url
             vc.navigationTitle = eventSummaries[indexPath.row].title
             // TODO いつか変える
             self.sawWebView = true
-            presentViewController(vc, animated: true, completion: nil)
-            // Fallback on earlier versions
+            present(vc, animated: true, completion: nil)
         }
     }
 }
@@ -199,11 +195,11 @@ extension BaseTableViewController: SFSafariViewControllerDelegate, UIWebViewDele
 // MARK: - DZNEmptyDataSetDelegate
 extension BaseTableViewController: DZNEmptyDataSetDelegate {
 
-    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let text = "条件に合致する情報がありません"
         let attribs = [
-            NSFontAttributeName: UIFont.boldSystemFontOfSize(18),
-            NSForegroundColorAttributeName: UIColor.darkGrayColor()
+            NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18),
+            NSForegroundColorAttributeName: UIColor.darkGray
         ]
 
         return NSAttributedString(string: text, attributes: attribs)
@@ -213,19 +209,19 @@ extension BaseTableViewController: DZNEmptyDataSetDelegate {
 // MARK: - DZNEmptyDataSetSource
 extension BaseTableViewController: DZNEmptyDataSetSource {
 
-    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
         return true
     }
 
-    func emptyDataSetWillAppear(scrollView: UIScrollView!) {
+    func emptyDataSetWillAppear(_ scrollView: UIScrollView!) {
         if let tableView = self.scrollView as? UITableView {
-            tableView.separatorColor = UIColor.clearColor();
+            tableView.separatorColor = UIColor.clear;
         }
     }
 
-    func emptyDataSetDidDisappear(scrollView: UIScrollView!) {
+    func emptyDataSetDidDisappear(_ scrollView: UIScrollView!) {
         if let tableView = self.scrollView as? UITableView {
-            tableView.separatorColor = UIColor.grayColor();
+            tableView.separatorColor = UIColor.gray;
         }
     }
 }

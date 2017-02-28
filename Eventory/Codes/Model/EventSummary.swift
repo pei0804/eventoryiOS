@@ -46,10 +46,10 @@ class EventSummary {
     var place: String = ""
     
     // 開催日時
-    var startAt: NSDate = NSDate()
+    var startAt: Date = Date()
     
     // 終了日時
-    var endAt: NSDate = NSDate()
+    var endAt: Date = Date()
     
     // 分別ステータス
     var checkStatus: Int = 0
@@ -57,7 +57,7 @@ class EventSummary {
     //　開始日
     var eventDate: String = ""
     
-    func updateWithEvent(event: Event) {
+    func updateWithEvent(_ event: Event) {
         self.eventId        = event.eventId
         self.title          = event.title
         self.apiId          = event.apiId
@@ -68,41 +68,39 @@ class EventSummary {
         //self.waitlisted     = event.waitlisted
         self.address        = event.address
         self.place          = event.place
-        self.startAt        = event.startAt
-        self.endAt          = event.endAt
+        self.startAt        = event.startAt as Date
+        self.endAt          = event.endAt as Date
     }
 }
 
 enum Api: Int {
-    case Atdn = 0
-    case Connpass = 1
-    case Doorkeeper = 2
-    case None = 5
+    case atdn = 0
+    case connpass = 1
+    case doorkeeper = 2
+    case none = 5
     
     func getName() -> String {
         switch self {
-        case .Atdn:         return "ATDN"
-        case .Connpass:     return "Connpass"
-        case .Doorkeeper:   return "Doorkeeper"
-        case .None:         return ""
+        case .atdn:         return "ATDN"
+        case .connpass:     return "Connpass"
+        case .doorkeeper:   return "Doorkeeper"
+        case .none:         return ""
         }
     }
 }
 
 enum CheckStatus: Int {
-    case NoCheck = 0
-    case Keep = 1
-    case NoKeep = 2
-    case Search = 3
-    case None = 5
+    case noCheck = 0
+    case keep = 1
+    case noKeep = 2
+    case none = 5
     
     func getName() -> String {
         switch self {
-        case .NoCheck:   return ""
-        case .Keep:      return "キープ"
-        case .NoKeep:    return "興味なし"
-        case .Search:    return ""
-        case .None:      return ""
+        case .noCheck:   return ""
+        case .keep:      return "キープ"
+        case .noKeep:    return "興味なし"
+        case .none:      return ""
         }
     }
 }

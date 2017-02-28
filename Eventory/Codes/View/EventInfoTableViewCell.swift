@@ -12,12 +12,12 @@ class EventInfoTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.separatorInset = UIEdgeInsetsZero
-        self.layoutMargins = UIEdgeInsetsZero
+        self.separatorInset = UIEdgeInsets.zero
+        self.layoutMargins = UIEdgeInsets.zero
         self.contentView.autoresizingMask = autoresizingMask;
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
@@ -31,68 +31,68 @@ class EventInfoTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLblWidth: NSLayoutConstraint!
     
     var id: Int = 0
-    var indexPath: NSIndexPath = NSIndexPath(index: 0)
+    var indexPath: IndexPath = IndexPath(index: 0)
     var eventSummary: EventSummary = EventSummary()
     let apiFromMessage = "情報提供元："
     
-    private func keepEvent() {
+    fileprivate func keepEvent() {
         self.titileLbl.textColor = Colors.main
         self.keepButton.active()
         self.noKeepButton.noActive()
     }
     
-    private func noKeepEvent() {
+    fileprivate func noKeepEvent() {
         self.titileLbl.textColor = Colors.noKeep
         self.noKeepButton.active()
         self.keepButton.noActive()
     }
     
-    private func noCheckEvent() {
+    fileprivate func noCheckEvent() {
         self.titileLbl.textColor = Colors.noCheck
         self.noKeepButton.noActive()
         self.keepButton.noActive()
     }
     
-    @IBAction func keepButton(sender: AnyObject) {
+    @IBAction func keepButton(_ sender: Any) {
         EventManager.sharedInstance.keepAction(id, isKeep: true)
-        self.eventSummary.checkStatus = CheckStatus.Keep.rawValue
+        self.eventSummary.checkStatus = CheckStatus.keep.rawValue
         self.keepEvent()
     }
     
-    @IBAction func noKeepButton(sender: AnyObject) {
+    @IBAction func noKeepButton(_ sender: Any) {
         EventManager.sharedInstance.keepAction(id, isKeep: false)
-        self.eventSummary.checkStatus = CheckStatus.NoKeep.rawValue
+        self.eventSummary.checkStatus = CheckStatus.noKeep.rawValue
         self.noKeepEvent()
     }
     
-    func bind(eventSummary: EventSummary, indexPath: NSIndexPath) {
+    func bind(_ eventSummary: EventSummary, indexPath: IndexPath) {
         self.eventSummary = eventSummary
         
         // イベントの情報
-        if self.eventSummary.checkStatus == CheckStatus.NoCheck.rawValue {
+        if self.eventSummary.checkStatus == CheckStatus.noCheck.rawValue {
             self.noCheckEvent()
-        } else if self.eventSummary.checkStatus == CheckStatus.Keep.rawValue {
+        } else if self.eventSummary.checkStatus == CheckStatus.keep.rawValue {
             self.keepEvent()
-        } else if self.eventSummary.checkStatus == CheckStatus.NoKeep.rawValue {
+        } else if self.eventSummary.checkStatus == CheckStatus.noKeep.rawValue {
             self.noKeepEvent()
         }
         
-        if eventSummary.apiId == ApiId.Atdn.rawValue {
-            self.apiNameLbl.text = apiFromMessage + ApiId.Atdn.getName()
+        if eventSummary.apiId == ApiId.atdn.rawValue {
+            self.apiNameLbl.text = apiFromMessage + ApiId.atdn.getName()
             self.eventStatusLbl.text = "\(eventSummary.accepted) / 定員\(eventSummary.limit)人"
-        } else if eventSummary.apiId == ApiId.Connpass.rawValue {
-            self.apiNameLbl.text = apiFromMessage + ApiId.Connpass.getName()
+        } else if eventSummary.apiId == ApiId.connpass.rawValue {
+            self.apiNameLbl.text = apiFromMessage + ApiId.connpass.getName()
             self.eventStatusLbl.text = "定員\(eventSummary.limit)人"
-        } else if eventSummary.apiId == ApiId.Doorkeeper.rawValue {
+        } else if eventSummary.apiId == ApiId.doorkeeper.rawValue {
             self.eventStatusLbl.text = "\(eventSummary.accepted) / 定員\(eventSummary.limit)人"
-            self.apiNameLbl.text = apiFromMessage + ApiId.Doorkeeper.getName()
+            self.apiNameLbl.text = apiFromMessage + ApiId.doorkeeper.getName()
         }
         
         self.indexPath = indexPath
         
         self.titileLbl.text = eventSummary.title
         self.titileLbl.numberOfLines = 0
-        self.titileLbl.lineBreakMode = .ByWordWrapping
+        self.titileLbl.lineBreakMode = .byWordWrapping
         
         self.addressLbl.text = eventSummary.address != "" ? eventSummary.address : "開催地未定"
         self.eventSummary.eventDate = ViewFormaatter.sharedInstance.setEventDate(eventSummary)

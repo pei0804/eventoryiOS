@@ -10,26 +10,26 @@ import Alamofire
 import ObjectMapper
 import RealmSwift
 import SwiftTask
+import SwiftyJSON
 
 class EventManager {
-    
+
     static let sharedInstance = EventManager()
-    
+
     private init() {}
-    
+
     private var realm: Realm {
-        
         guard let realm = try? Realm() else {
             fatalError("Realm error")
         }
         return realm
     }
-    
+
     func getSelectNewEventAll() -> [EventSummary] {
         let genres: [String]! = UserRegister.sharedInstance.getUserSettingGenres()
         let places: [String]! = UserRegister.sharedInstance.getUserSettingPlaces()
         var selectGenre: String = ""
-        
+
         // クエリ文字の結合が1回目かチェックする
         var firstFlg: Bool = false
         for genre in genres {
@@ -43,7 +43,7 @@ class EventManager {
         if genres.count != 0 {
             selectGenre += ")"
         }
-        
+
         firstFlg = false
         for place in places {
             if !firstFlg {
@@ -56,46 +56,22 @@ class EventManager {
         if places.count != 0 {
             selectGenre += ")"
         }
-        
-        let events: Results<Event> = self.realm.objects(Event).filter("checkStatus == \(CheckStatus.NoCheck.rawValue) \(selectGenre.realmEscaped)").sorted("startAt")
+
+        let events: Results<Event> = self.realm.objects(Event.self).filter("checkStatus == \(CheckStatus.noCheck.rawValue) \(selectGenre.realmEscaped)").sorted(byProperty: "startAt")
         return setEventInfo(events)
     }
-    
-    func getNewEventAll(term: String) -> [EventSummary] {
-        let termArr: [String] = term.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-        var selectGenre: String = ""
-        
-        var firstFlg: Bool = false
-        
-        if term != "" {
-            for termWord in termArr {
-                if !firstFlg {
-                    selectGenre += "AND (title CONTAINS[c] '\(termWord.realmEscaped)' OR address CONTAINS[c] '\(termWord.realmEscaped)' OR  place CONTAINS[c] '\(termWord.realmEscaped)' "
-                    firstFlg = true
-                } else {
-                    selectGenre += "OR title CONTAINS[c] '\(termWord.realmEscaped)' OR address CONTAINS[c] '\(termWord.realmEscaped)' OR  place CONTAINS[c] '\(termWord.realmEscaped)' "
-                }
-            }
-            if termArr.count != 0 {
-                selectGenre += ")"
-            }
-        }
-        
-        let events: Results<Event> = self.realm.objects(Event).filter("checkStatus == \(CheckStatus.NoCheck.rawValue) \(selectGenre.realmEscaped)").sorted("startAt")
-        return setEventInfo(events)
-    }
-    
+
     func getKeepEventAll() -> [EventSummary] {
-        let events: Results<Event> = self.realm.objects(Event).filter("checkStatus == \(CheckStatus.Keep.rawValue)").sorted("startAt")
+        let events: Results<Event> = self.realm.objects(Event.self).filter("checkStatus == \(CheckStatus.keep.rawValue)").sorted(byProperty: "startAt")
         return setEventInfo(events)
     }
-    
+
     func getNoKeepEventAll() -> [EventSummary] {
-        let events: Results<Event> = self.realm.objects(Event).filter("checkStatus == \(CheckStatus.NoKeep.rawValue)").sorted("startAt")
+        let events: Results<Event> = self.realm.objects(Event.self).filter("checkStatus == \(CheckStatus.noKeep.rawValue)").sorted(byProperty: "startAt")
         return setEventInfo(events)
     }
-    
-    func setEventInfo(searchEvents: Results<Event>) -> [EventSummary] {
+
+    func setEventInfo(_ searchEvents: Results<Event>) -> [EventSummary] {
         var eventSummaries: [EventSummary] = [EventSummary]()
         for event in searchEvents {
             let eventSummary: EventSummary = EventSummary()
@@ -110,51 +86,44 @@ class EventManager {
             //eventSummary.waitlisted = event.waitlisted
             eventSummary.address    = event.address
             eventSummary.place      = event.place
-            eventSummary.startAt    = event.startAt
-            eventSummary.endAt      = event.endAt
+            eventSummary.startAt    = event.startAt as Date
+            eventSummary.endAt      = event.endAt as Date
             eventSummary.checkStatus = event.checkStatus
             eventSummaries.append(eventSummary)
         }
         return eventSummaries
     }
-    
+
     func eventInitializer() {
-        guard let event: Results<Event> = self.realm.objects(Event) else {
-            return
+        self.realm.beginWrite()
+        let oldLocations = self.realm.objects(Event.self).filter(NSPredicate(format:"startAt < %@", NSDate().addingTimeInterval(0)))
+        self.realm.delete(oldLocations)
+        do {
+            try realm.commitWrite()
         }
-        if event.count == 0 {
-            self.fetchNewEvent()
-        } else {
-            self.realm.beginWrite()
-            let oldLocations = self.realm.objects(Event).filter(NSPredicate(format:"startAt < %@", NSDate().dateByAddingTimeInterval(0)))
-            self.realm.delete(oldLocations)
-            do {
-                try realm.commitWrite()
-            }
-            catch {
-                fatalError("Realm can not delete")
-            }
+        catch {
+            fatalError("Realm can not delete")
         }
     }
-    
-    func keepAction(id: Int, isKeep: Bool) {
-        if let thisEvent = self.realm.objects(Event).filter("id == \(id)").first {
+
+    func keepAction(_ id: Int, isKeep: Bool) {
+        if let thisEvent = self.realm.objects(Event.self).filter("id == \(id)").first {
             if isKeep {
-                
+
                 do {
                     try self.realm.write {
-                        thisEvent.checkStatus = CheckStatus.Keep.rawValue
+                        thisEvent.checkStatus = CheckStatus.keep.rawValue
                     }
                 }
                 catch {
                     fatalError("Realm can not wirte")
                 }
-                
+
             } else {
-                
+
                 do {
                     try self.realm.write {
-                        thisEvent.checkStatus = CheckStatus.NoKeep.rawValue
+                        thisEvent.checkStatus = CheckStatus.noKeep.rawValue
                     }
                 }
                 catch {
@@ -163,11 +132,11 @@ class EventManager {
             }
         }
     }
-    
+
     func fetchNewEvent() -> Task<Float, String, NSError?> {
-        var updatedAt = TerminalPreferenceManager.sharedInstance.getUserEventInfoUpdateTime(TerminalPreferenceClass.EventFetch)
+        var updatedAt = TerminalPreferenceManager.sharedInstance.getUserEventInfoUpdateTime(TerminalPreferenceClass.eventFetch)
         let places = UserRegister.sharedInstance.getUserSettingPlaces()
-        let result = self.realm.objects(Event)
+        let result = self.realm.objects(Event.self)
 
         // 初回ダウンロードは更新時間は関係なしに取ってくるが、
         // サーバーとの通信エラーが発生するとそのまま更新時間がセットされてしまうので、
@@ -178,52 +147,59 @@ class EventManager {
 
         let API = APISetting.scheme + APISetting.host
 
+
         return Task<Float, String, NSError?> { progress, fulfill, reject, configure in
-            Alamofire.request(.GET, "\(API)/api/smt/events", parameters: ["updated_at": updatedAt, "places": places.joinWithSeparator(",")]).responseJSON { response in
+            Alamofire.request("\(API)/api/smt/events", parameters: ["updated_at": updatedAt, "places": places.joined(separator: ",")]).responseJSON { (response) in
+
                 if let statusCode = response.response?.statusCode {
                     if statusCode == 304 {
                         fulfill("SUCCESS")
                         return
                     }
                 }
-                guard let json = response.result.value as? Array<Dictionary<String,AnyObject>> else {
+
+                guard response.result.isSuccess, let value = response.result.value else {
                     reject(nil)
                     return
                 }
-                json.forEach {
-                    do {
-                        guard let event = Mapper<Event>().map($0) else {
-                            return
-                        }
-                        try self.realm.write {
-                            self.realm.create(Event.self,
-                                value:[
-                                    "id":event.id,
-                                    "eventId"   : event.eventId,
-                                    "apiId"     : event.apiId,
-                                    "title"     : event.title,
-                                    //"desc" : event.desc,
-                                    "url"       : event.url,
-                                    "limit"     : event.limit,
-                                    "accepted"  : event.accepted,
-                                    //"waitlisted" : event.waitlisted,
-                                    "address"   : event.address,
-                                    "place"     : event.place,
-                                    "startAt"   : event.startAt,
-                                    "endAt"     : event.endAt
-                                ],
-                                update: true)
-                        }
-                    } catch {}
+
+                // write request result to realm database
+                let json = JSON(value)
+                self.realm.beginWrite()
+                for (_, subJson) : (String, JSON) in json {
+                    let event: Event = Mapper<Event>().map(JSONObject: subJson.dictionaryObject!)!
+                    self.realm.create(Event.self,
+                                      value:[
+                                        "id":event.id,
+                                        "eventId"   : event.eventId,
+                                        "apiId"     : event.apiId,
+                                        "title"     : event.title,
+                                        //"desc" : event.desc,
+                                        "url"       : event.url,
+                                        "limit"     : event.limit,
+                                        "accepted"  : event.accepted,
+                                        //"waitlisted" : event.waitlisted,
+                                        "address"   : event.address,
+                                        "place"     : event.place,
+                                        "startAt"   : event.startAt,
+                                        "endAt"     : event.endAt
+                        ],
+                                      update: true)
+                }
+
+                do {
+                    try self.realm.commitWrite()
+                } catch {
+
                 }
                 fulfill("SUCCESS")
-                TerminalPreferenceManager.sharedInstance.setUserEventInfoUpdateTime(TerminalPreferenceClass.EventFetch)
+                TerminalPreferenceManager.sharedInstance.setUserEventInfoUpdateTime(TerminalPreferenceClass.eventFetch)
             }
         }
     }
-    
-    func genreInitializer() ->  [Dictionary<String, AnyObject>] {
-        let genreArray: [Dictionary<String, AnyObject>] = [
+
+    func genreInitializer() ->  [Dictionary<String, Any>] {
+        let genreArray: [Dictionary<String, Any>] = [
             [
                 "name": "Javascript",
                 "status": false
@@ -283,10 +259,10 @@ class EventManager {
         ]
         return genreArray
     }
-    
-    
-    func placesInitializer() ->  [Dictionary<String, AnyObject>] {
-        let place: [Dictionary<String, AnyObject>] = [
+
+
+    func placesInitializer() ->  [Dictionary<String, Any>] {
+        let place: [Dictionary<String, Any>] = [
             [
                 "name": "北海道",
                 "status": false
@@ -477,7 +453,6 @@ class EventManager {
 }
 
 public extension String {
-
     public var realmEscaped: String {
         let reps = [
             "\\" : "\\\\",
@@ -485,7 +460,7 @@ public extension String {
             ]
         var ret = self
         for rep in reps {
-            ret = self.stringByReplacingOccurrencesOfString(rep.0, withString: rep.1)
+            ret = self.replacingOccurrences(of: rep.0, with: rep.1)
         }
         return ret
     }

@@ -13,8 +13,8 @@ class BaseNavigationViewController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationBar.tintColor  = Colors.main
-        self.navigationBar.translucent = false
-        self.toolbar.translucent = false
+        self.navigationBar.isTranslucent = false
+        self.toolbar.isTranslucent = false
     }
     
     override func didReceiveMemoryWarning() {

@@ -13,15 +13,15 @@ class CheckListTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.tintColor = Colors.main
-        self.separatorInset = UIEdgeInsetsZero
-        self.layoutMargins = UIEdgeInsetsZero
+        self.separatorInset = UIEdgeInsets.zero
+        self.layoutMargins = UIEdgeInsets.zero
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
-    func bind(userRegister: Dictionary<String, AnyObject>) {
+    func bind(_ userRegister: Dictionary<String, Any>) {
         self.textLabel?.text = userRegister["name"] as? String
         if userRegister["status"] as! Bool {
             self.check()
@@ -30,27 +30,27 @@ class CheckListTableViewCell: UITableViewCell {
         }
     }
     
-    func checkAction(inout userRegister: [Dictionary<String, AnyObject>]?, indexPath: NSIndexPath, inout checkCount: Int) {
-        if self.accessoryType == .None {
-            userRegister![indexPath.row]["status"] = true
+    func checkAction(_ userRegister: inout [Dictionary<String, Any>]?, indexPath: IndexPath, checkCount: inout Int) {
+        if self.accessoryType == .none {
+            userRegister![indexPath.row]["status"] = true as Any?
             checkCount += 1
             self.check()
         } else {
-            userRegister![indexPath.row]["status"] = false
+            userRegister![indexPath.row]["status"] = false as Any?
             checkCount -= 1
             self.checkRemove()
         }
     }
     
     func check() {
-        self.accessoryType = .Checkmark
-        self.textLabel?.font = UIFont.boldSystemFontOfSize(17)
+        self.accessoryType = .checkmark
+        self.textLabel?.font = UIFont.boldSystemFont(ofSize: 17)
         self.textLabel?.textColor = Colors.main
     }
     
     func checkRemove() {
-        self.accessoryType = .None
-        self.textLabel?.font = UIFont.systemFontOfSize(17)
-        self.textLabel?.textColor = UIColor.blackColor()
+        self.accessoryType = .none
+        self.textLabel?.font = UIFont.systemFont(ofSize: 17)
+        self.textLabel?.textColor = UIColor.black
     }
 }
