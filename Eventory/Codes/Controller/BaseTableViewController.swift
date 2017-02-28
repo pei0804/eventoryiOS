@@ -25,9 +25,6 @@ internal class BaseTableViewController: UITableViewController {
 
     var eventSummaries: [EventSummary]? {
         didSet {
-            if let eventSummaries = self.eventSummaries, eventSummaries.count == 0 {
-                self.tableView.setContentOffset(CGPoint.zero, animated: false)
-            }
             self.tableView.reloadData()
         }
     }

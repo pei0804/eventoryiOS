@@ -32,8 +32,9 @@ class EventInfoViewController: BaseTableViewController {
             SVProgressHUD.show(withStatus: ServerConnectionMessage)
             self.refresh() {
                 SVProgressHUD.dismiss()
-                self.tableView.setContentOffset(CGPoint(x: 0, y: -20), animated: true)
-
+                if EventManager.sharedInstance.getSelectNewEventAll().count > 0 {
+                    self.tableView.setContentOffset(CGPoint(x: 0, y: -20), animated: true)
+                }
                 let updatedAt = TerminalPreferenceManager.sharedInstance.getUserEventInfoUpdateTime(TerminalPreferenceClass.tutorial)
                 guard let eventSummaries = self.eventSummaries else {
                     return
@@ -140,8 +141,13 @@ extension EventInfoViewController: CoachMarksControllerDataSource {
         default: break
         }
 
+<<<<<<< HEAD
         let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation, hintText: hintText, nextText: nil)
         
+=======
+        let coachViews = coachMarksController.helper.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation, hintText: hintText, nextText: nil)
+
+>>>>>>> swift3.0
         return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
         
     }
