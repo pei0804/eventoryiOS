@@ -78,6 +78,7 @@ internal class BaseTableViewController: UITableViewController {
     }
 
     func handleRefresh() {
+        self.goTop()
     }
 
     func viewWillEnterForeground(_ notification: Notification?) {
@@ -87,9 +88,12 @@ internal class BaseTableViewController: UITableViewController {
     func viewDidEnterBackground(_ notification: Notification?) {
     }
 
+    func goTop() {
+        self.tableView.setContentOffset(CGPoint(x: 0, y: -20), animated: true)
+    }
+
     @IBAction func pullRefresh(_ refreshControl: UIRefreshControl) {
         SVProgressHUD.show(withStatus: ServerConnectionMessage)
-        self.handleRefresh()
         self.refresh() {
             SVProgressHUD.dismiss()
             refreshControl.endRefreshing()

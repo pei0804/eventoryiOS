@@ -30,11 +30,9 @@ class EventInfoViewController: BaseTableViewController {
             sawWebView = false
         } else {
             SVProgressHUD.show(withStatus: ServerConnectionMessage)
+            self.handleRefresh()
             self.refresh() {
                 SVProgressHUD.dismiss()
-                if EventManager.sharedInstance.getSelectNewEventAll().count > 0 {
-                    self.tableView.setContentOffset(CGPoint(x: 0, y: -20), animated: true)
-                }
                 let updatedAt = TerminalPreferenceManager.sharedInstance.getUserEventInfoUpdateTime(TerminalPreferenceClass.tutorial)
                 guard let eventSummaries = self.eventSummaries else {
                     return
